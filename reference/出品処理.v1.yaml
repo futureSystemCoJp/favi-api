@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  title: 出品処理
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /exhibit/:
+    get:
+      summary: 出品情報検索
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                  offset:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Exhibit'
+      operationId: get-exhibit
+      description: ''
+  '/exhibit/{exhibitCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
+    get:
+      summary: 出品情報詳細
+      tags: []
+      responses: {}
+      operationId: get-exhibit-exhivitCode
+      description: ''
+    put:
+      summary: 出品情報更新
+      operationId: put-exhibit-exhibitCode
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    Exhibit:
+      title: 出品構造体
+      type: object
+      properties:
+        exhibitCode:
+          type: number
+        exhibitPrice:
+          type: number
+        '':
+          type: string
