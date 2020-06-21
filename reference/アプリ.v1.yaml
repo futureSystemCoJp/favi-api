@@ -1,0 +1,433 @@
+openapi: 3.0.0
+info:
+  title: アプリAPI
+  version: '1.0'
+  description: |
+    アプリからコールされるAPI
+servers:
+  - url: 'https://d32rxh06xfiiaj.cloudfront.net/api/v1'
+    description: 開発版
+paths:
+  /like/:
+    get:
+      summary: いいね一覧
+      tags:
+        - いいね
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                  offset:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: './出品処理.v1.yaml#/components/schemas/Exhibit'
+      operationId: get-like
+  '/like/{exhibitCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
+    put:
+      summary: いいね実行
+      operationId: put-like-exhibitCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - いいね
+    delete:
+      summary: いいねキャンセル
+      operationId: delete-like-exhibitCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - いいね
+  /toDo/:
+    get:
+      summary: やる事リスト一覧
+      responses: {}
+      operationId: get-toDo
+      tags:
+        - やる事
+  /login/:
+    post:
+      summary: ログイン実行
+      operationId: post-login
+      responses:
+        '200':
+          description: OK
+      tags:
+        - ユーザー関連
+  '/user/{$id}/':
+    parameters:
+      - schema:
+          type: string
+        name: $id
+        in: path
+        required: true
+    get:
+      summary: 他人ユーザー取得
+      tags:
+        - ユーザー関連
+      responses: {}
+      operationId: get-user-$id
+  /coupon/:
+    get:
+      summary: 所有クーポン一覧
+      tags:
+        - ユーザー関連
+      responses: {}
+      operationId: get-coupon
+  /register/email/:
+    post:
+      summary: メールアドレス仮登録
+      operationId: post-register-email
+      responses:
+        '200':
+          description: OK
+      tags:
+        - ユーザー登録
+  /register/account/:
+    post:
+      summary: ユーザー個人情報登録
+      operationId: post-register-account
+      responses:
+        '200':
+          description: OK
+      tags:
+        - ユーザー登録
+    put:
+      summary: ユーザー個人情報変更
+      operationId: put-register-account
+      responses:
+        '200':
+          description: OK
+      tags:
+        - ユーザー登録
+  /register/profile/:
+    post:
+      summary: プロフィール登録
+      operationId: post-register-profile
+      responses:
+        '200':
+          description: OK
+      description: ''
+      tags:
+        - ユーザー登録
+    put:
+      summary: プロフィール変更
+      operationId: put-register-profile
+      responses:
+        '200':
+          description: OK
+      tags:
+        - ユーザー登録
+  /search/:
+    get:
+      summary: 検索条件一覧
+      tags:
+        - 検索条件保存
+      responses: {}
+      operationId: get-search
+      description: 検索条件一覧
+      parameters: []
+  '/search/{searchCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: searchCode
+        in: path
+        required: true
+    put:
+      summary: 検索条件変更
+      operationId: put-search-searchCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 検索条件保存
+    delete:
+      summary: 検索条件削除
+      operationId: delete-search-searchCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 検索条件保存
+  /offer/price/:
+    post:
+      summary: 価格相談申込
+      operationId: post-offer-price
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 交渉
+  /offer/:
+    post:
+      summary: 購入依頼
+      operationId: post-offer
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 交渉
+  /offer/ok/:
+    post:
+      summary: 売却承諾
+      operationId: post-offer-ok
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 交渉
+  /offer/ng/:
+    post:
+      summary: 売却拒否
+      operationId: post-offer-ng
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 交渉
+  '/transact/receive/{transactCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: transactCode
+        in: path
+        required: true
+    put:
+      summary: 受取方法変更
+      operationId: put-transact-receive-$transactCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 取引
+  '/transact/card/{transactCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: transactCode
+        in: path
+        required: true
+    put:
+      summary: カード決済要求
+      operationId: put-transact-card-transactCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 取引
+  '/transact/bank/{transactCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: transactCode
+        in: path
+        required: true
+    put:
+      summary: 銀行振込要求
+      operationId: put-transact-bank-transactCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 取引
+  '/transact/document/{transactCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: transactCode
+        in: path
+        required: true
+    post:
+      summary: 書類アップロード
+      operationId: post-transact-document-transactCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 取引
+    put:
+      summary: 書類受取完了報告
+      operationId: put-transact-document-transactCode
+      responses:
+        '200':
+          description: OK
+  '/transact/complete/{transactCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: transactCode
+        in: path
+        required: true
+    put:
+      summary: 車両受取完了報告
+      operationId: put-transact-complete-transactCode
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: 車両発送通知
+      operationId: post-transact-complete-transactCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 取引
+  /transact/delivery/:
+    post:
+      summary: ''
+      operationId: post-transact-delivery
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 取引
+  '/message/{transactCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: transactCode
+        in: path
+        required: true
+    get:
+      summary: 取引メッセージ一覧
+      tags: []
+      responses: {}
+      operationId: get-message-transactCode
+    post:
+      summary: 取引メッセージ作成
+      operationId: post-message-transactCode
+      responses:
+        '200':
+          description: OK
+  /exhibit/:
+    get:
+      summary: 出品情報検索
+      tags:
+        - 出品情報
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                  offset:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Exhibit'
+      operationId: get-exhibit
+      description: ''
+  '/exhibit/{exhibitCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
+    get:
+      summary: 出品情報詳細
+      tags:
+        - 出品情報
+      responses: {}
+      operationId: get-exhibit-exhivitCode
+      description: ''
+    put:
+      summary: 出品情報更新
+      operationId: put-exhibit-exhibitCode
+      responses:
+        '200':
+          description: OK
+  /exhibit/price/:
+    get:
+      summary: 価格分布取得
+      tags:
+        - 出品情報
+      responses: {}
+      operationId: get-exhibit-price
+      description: ''
+  /history/:
+    get:
+      summary: 閲覧履歴一覧
+      tags:
+        - 出品情報
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                  offset:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Exhibit'
+      operationId: get-history
+  /inform/:
+    get:
+      summary: 全体お知らせ一覧
+      tags:
+        - 全体お知らせ
+      responses: {}
+      operationId: get-inform
+  '/inform/{informCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: informCode
+        in: path
+        required: true
+    get:
+      summary: 全体お知らせ取得
+      tags:
+        - 全体お知らせ
+      responses: {}
+      operationId: get-inform-informCode
+  /notify/:
+    get:
+      summary: 自分宛お知らせ一覧
+      tags:
+        - あなた宛お知らせ
+      responses: {}
+      operationId: get-notify
+      description: ''
+  '/notify/{notifyCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: notifyCode
+        in: path
+        required: true
+    get:
+      summary: 貴方宛お知らせ取得
+      tags:
+        - あなた宛お知らせ
+      responses: {}
+      operationId: get-notify-notifyCode
+components:
+  schemas: {}
