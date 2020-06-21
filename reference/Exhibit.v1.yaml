@@ -1,0 +1,8 @@
+title: Exhibit
+type: object
+description: 出品情報の構造体
+properties:
+  exhibitCode:
+    type: number
+  exhibitPrice:
+    type: number

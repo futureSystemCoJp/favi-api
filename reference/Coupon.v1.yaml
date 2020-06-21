@@ -1,0 +1,11 @@
+title: Coupon
+type: object
+description: クーポン情報
+properties:
+  couponCode:
+    type: number
+  couponName:
+    type: string
+required:
+  - couponCode
+  - couponName
