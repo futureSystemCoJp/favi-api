@@ -6,3 +6,38 @@ properties:
     type: number
   exhibitPrice:
     type: number
+    description: 販売価格
+  carTypeName:
+    type: string
+    description: 車種名
+  gradeName:
+    type: string
+    description: グレード名
+  exhibitDistanceSum:
+    type: number
+    description: 走行距離合計
+  exhibitPurchase:
+    type: number
+    description: 業者買取予想価格
+  exhibitOutPoimt:
+    type: number
+    description: 外装評価点数
+  exhibitInPoint:
+    type: number
+    description: 内装評価点数
+  exhibitRegisterYear:
+    type: number
+    description: 初年度登録(年)
+  exhibitRegisterMonth:
+    type: number
+    description: 初年度登録(月)
+required:
+  - exhibitCode
+  - exhibitPrice
+  - carTypeName
+  - exhibitDistanceSum
+  - exhibitPurchase
+  - exhibitOutPoimt
+  - exhibitInPoint
+  - exhibitRegisterYear
+  - exhibitRegisterMonth

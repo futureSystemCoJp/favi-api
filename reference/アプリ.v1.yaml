@@ -168,10 +168,40 @@ paths:
       summary: 検索条件一覧
       tags:
         - 検索条件保存
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    searchCode:
+                      type: number
+                      description: 検索条件ID
+                    searchName:
+                      type: string
+                      description: 検索条件名
+                    data:
+                      type: array
+                      description: 該当する出品情報最大10件
+                      items:
+                        $ref: ./Exhibit.v1.yaml
+                  required:
+                    - searchCode
+                    - searchName
       operationId: get-search
       description: 検索条件一覧
       parameters: []
+    post:
+      summary: 検索条件追加
+      operationId: post-search
+      responses:
+        '200':
+          description: OK
+      description: ''
   '/search/{searchCode}/':
     parameters:
       - schema:
@@ -498,6 +528,26 @@ paths:
                     type: array
                     items:
                       $ref: ./Exhibit.v1.yaml
+        '':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                  offset:
+                    type: number
+                  data:
+                    type:
+                      - string
+                      - array
+                    items:
+                      $ref: ./Exhibit.v1.yaml
+                required:
+                  - count
+                  - offset
+                  - data
       operationId: get-history
       description: 閲覧した時間の降順で表示
   /inform/:
