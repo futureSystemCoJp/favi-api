@@ -29,8 +29,13 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: './出品処理.v1.yaml#/components/schemas/Exhibit'
+                      $ref: ./Exhibit.v1.yaml
+                required:
+                  - count
+                  - offset
+                  - data
       operationId: get-like
+      description: ''
   '/like/{exhibitCode}/':
     parameters:
       - schema:
@@ -46,6 +51,7 @@ paths:
           description: OK
       tags:
         - いいね
+      description: いいねを新たに実行する
     delete:
       summary: いいねキャンセル
       operationId: delete-like-exhibitCode
@@ -54,6 +60,7 @@ paths:
           description: OK
       tags:
         - いいね
+      description: いいねを取り消す
   /toDo/:
     get:
       summary: やる事リスト一覧
@@ -393,9 +400,83 @@ paths:
       summary: 価格分布取得
       tags:
         - 出品情報
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  price:
+                    type: object
+                    description: 価格
+                    required:
+                      - min
+                      - max
+                      - range
+                    properties:
+                      min:
+                        type: number
+                        description: 最小価格
+                      max:
+                        type: number
+                        description: 最大価格
+                      range:
+                        type: array
+                        description: 価格分布
+                        items:
+                          type: object
+                          properties:
+                            price:
+                              type: number
+                              description: 価格帯
+                            count:
+                              type: number
+                              description: 該当台数
+                          required:
+                            - price
+                            - count
+                  value:
+                    type: object
+                    description: お得度
+                    required:
+                      - min
+                      - max
+                      - range
+                    properties:
+                      min:
+                        type: number
+                        description: 最低お得価格
+                      max:
+                        type: number
+                        description: 最大お得価格
+                      range:
+                        type: array
+                        description: 分布
+                        items:
+                          type: object
+                          properties:
+                            price:
+                              type: number
+                              description: お得価格帯
+                            count:
+                              type: number
+                              description: 該当台数
+                          required:
+                            - price
+                            - count
+                required:
+                  - price
+                  - value
       operationId: get-exhibit-price
-      description: ''
+      description: 選択された車種（任意）の車両価格の分布を返却する
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: carTypeCode
+          description: 車種ID
   /history/:
     get:
       summary: 閲覧履歴一覧
@@ -416,8 +497,9 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Exhibit'
+                      $ref: ./Exhibit.v1.yaml
       operationId: get-history
+      description: 閲覧した時間の降順で表示
   /inform/:
     get:
       summary: 全体お知らせ一覧
@@ -476,6 +558,10 @@ paths:
                       ユーザーキー
                   exhibit:
                     type: object
+                    required:
+                      - count
+                      - offset
+                      - data
                     properties:
                       count:
                         type: number
@@ -487,6 +573,7 @@ paths:
                           $ref: ./Exhibit.v1.yaml
                 required:
                   - userKey
+                  - exhibit
       operationId: get-init
       description: |-
         このAPIはアプリ起動時に必ず一度呼ばれるAPIです。
@@ -497,6 +584,18 @@ paths:
         返されたユーザーキーを保存して下さい。
       tags:
         - Initializer
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: userFcmID
+          description: |
+            FireBaseのトークン
+        - schema:
+            type: string
+          in: query
+          name: userDeviceID
+          description: "Android : android ID , \niOS : 広告ID"
 components:
   schemas: {}
   securitySchemes:
