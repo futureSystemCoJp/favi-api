@@ -88,7 +88,83 @@ paths:
       summary: 他人ユーザー取得
       tags:
         - ユーザー関連
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userCode:
+                    type: number
+                    description: "ユーザーID\t"
+                  userNickName:
+                    type: string
+                    description: ニックネーム
+                  userProfile:
+                    type: string
+                    description: 自己紹介文
+                  transactCancel:
+                    type: number
+                    description: キャンセル回数
+                  carTypeName:
+                    type:
+                      - string
+                      - 'null'
+                    description: 愛車の車種名
+                  gradeName:
+                    type:
+                      - string
+                      - 'null'
+                    description: グレード名
+                  userCarByeYear:
+                    type:
+                      - number
+                      - 'null'
+                    description: 購入年
+                  userCarByeMonth:
+                    type:
+                      - number
+                      - 'null'
+                    description: 購入月
+                  reviews:
+                    type: array
+                    description: ユーザーへの評価
+                    items:
+                      type: object
+                      properties:
+                        userCode:
+                          type: number
+                          description: ユーザーID
+                        userNickName:
+                          type: string
+                          description: ニックネーム
+                        reviewMessage:
+                          type:
+                            - string
+                            - 'null'
+                          description: 評価本文
+                        reviewPolite:
+                          type: number
+                          description: "丁寧度点数\t"
+                        reviewQuick:
+                          type: number
+                          description: "スピード点数\t"
+                        reviewCreate:
+                          type: string
+                          description: 作成時刻
+                      required:
+                        - userCode
+                        - userNickName
+                        - reviewPolite
+                        - reviewQuick
+                        - reviewCreate
+                required:
+                  - userCode
+                  - userNickName
+                  - userProfile
+                  - transactCancel
       operationId: get-user-$id
   /coupon/:
     get:
@@ -227,10 +303,12 @@ paths:
           required: true
         - schema:
             type: string
+            enum:
+              - 普通
+              - 当座
           in: query
           name: userBankType
           description: "預金種目\t"
-          required: true
         - schema:
             type: string
           in: query
@@ -249,6 +327,9 @@ paths:
           in: query
           name: userBankPost
           description: 記号（郵貯）
+      description: |-
+        金融機関コードが9900（ゆうちょ銀行）の場合、userBankPostは必須。
+        それ以外の場合、userBankTypeは必須。
     put:
       summary: ユーザー個人情報変更
       operationId: put-register-account
@@ -259,7 +340,7 @@ paths:
         - ユーザー登録
   /register/profile/:
     post:
-      summary: プロフィール登録
+      summary: プロフィール変更
       operationId: post-register-profile
       responses:
         '200':
@@ -267,14 +348,59 @@ paths:
       description: ''
       tags:
         - ユーザー登録
-    put:
-      summary: プロフィール変更
-      operationId: put-register-profile
-      responses:
-        '200':
-          description: OK
-      tags:
-        - ユーザー登録
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: userNickName
+          description: ニックネーム
+          required: true
+        - schema:
+            type: string
+            enum:
+              - 0(男性)
+              - 1(女性)
+          in: query
+          name: userSex
+          description: 性別
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userCareer
+          description: 職業種別
+          required: true
+        - schema:
+            type: number
+          in: query
+          name: userCarMaker
+          description: メーカーID
+        - schema:
+            type: number
+          in: query
+          name: userCarType
+          description: 車種ID
+        - schema:
+            type: number
+          in: query
+          name: userCarByeYear
+          description: "購入年\t"
+        - schema:
+            type: number
+          in: query
+          name: userCarByeMonth
+          description: "購入月\t"
+        - schema:
+            type: string
+          in: query
+          name: userProfile
+          description: 自己紹介文
+          required: true
+        - schema: {}
+          in: query
+          name: userThumbnail
+          description: サムネイル画像（バイナリ）
+          required: true
   /search/:
     get:
       summary: 検索条件一覧
@@ -316,6 +442,19 @@ paths:
       description: ''
       tags:
         - 検索条件保存
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: searchName
+          description: 検索条件名
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: searchQuery
+          description: 検索クエリ
+          required: true
   '/search/{searchCode}/':
     parameters:
       - schema:
@@ -331,6 +470,12 @@ paths:
           description: OK
       tags:
         - 検索条件保存
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: searchFrequency
+          description: 頻度種別
     delete:
       summary: 検索条件削除
       operationId: delete-search-searchCode
@@ -426,6 +571,16 @@ paths:
           description: OK
       tags:
         - 取引
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - 0(直接引取)
+              - 1(陸送受取)
+          in: query
+          name: transactReceive
+          description: 受取方法
+          required: true
   '/transact/card/{transactCode}/':
     parameters:
       - schema:
@@ -441,6 +596,7 @@ paths:
           description: OK
       tags:
         - 取引
+      description: 未定
   '/transact/bank/{transactCode}/':
     parameters:
       - schema:
@@ -456,6 +612,7 @@ paths:
           description: OK
       tags:
         - 取引
+      description: 未定
   '/transact/document/{transactCode}/':
     parameters:
       - schema:
@@ -471,6 +628,25 @@ paths:
           description: OK
       tags:
         - 取引
+      parameters:
+        - schema:
+            type: number
+            enum:
+              - '0:委任状'
+              - '1:印鑑登録証明書'
+              - '2:委任状'
+              - '3:車検証'
+          in: query
+          name: documentType
+          description: 書類種別
+          required: true
+        - schema:
+            type: string
+            format: binary
+          in: query
+          name: documentImage
+          description: 画像バイナリ
+          required: true
     put:
       summary: 書類受取完了報告
       operationId: put-transact-document-transactCode
@@ -502,6 +678,7 @@ paths:
           description: OK
       tags:
         - 取引
+      description: ''
   /transact/delivery/:
     post:
       summary: 陸送発送依頼
