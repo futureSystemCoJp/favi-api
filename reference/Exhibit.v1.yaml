@@ -1,4 +1,4 @@
-title: Exhibit
+title: 出品情報一覧データ
 type: object
 description: 出品情報の構造体
 properties:

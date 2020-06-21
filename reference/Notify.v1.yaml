@@ -1,0 +1,14 @@
+title: 個人宛通知データ
+type: object
+properties:
+  notifyCode:
+    type: number
+  notifyType:
+    type: number
+    description: 個人通知種別
+  notifyCreate:
+    type: string
+    description: "作成時刻\t"
+  notifyMessage:
+    type: string
+    description: メッセージ

@@ -1,0 +1,16 @@
+title: やる事データ
+type: object
+properties:
+  toDoCode:
+    type: number
+  toDoMessage:
+    type: string
+    description: "本文\t"
+  toDoCreate:
+    type: string
+    description: 作成時刻
+  toDoType:
+    type: number
+    description: "やること種別\t"
+required:
+  - toDoCode

@@ -64,19 +64,19 @@ paths:
   /toDo/:
     get:
       summary: やる事リスト一覧
-      responses: {}
-      operationId: get-toDo
-      tags:
-        - やる事
-  /login/:
-    post:
-      summary: ログイン実行
-      operationId: post-login
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./ToDo.v1.yaml
+      operationId: get-toDo
       tags:
-        - ユーザー関連
+        - やる事
+      description: 全て一覧で表示
   '/user/{$id}/':
     parameters:
       - schema:
@@ -128,6 +128,17 @@ paths:
           description: OK
       tags:
         - ユーザー登録
+      parameters:
+        - schema:
+            type: string
+            format: email
+          in: query
+          name: userEmail
+          description: メールアドレス
+          required: true
+      description: |-
+        入力されたメールアドレスに仮登録のメールを送信する。
+        登録済みのメールアドレスでも成功します。
   /register/account/:
     post:
       summary: ユーザー個人情報登録
@@ -137,6 +148,107 @@ paths:
           description: OK
       tags:
         - ユーザー登録
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: userNameLast
+          description: "氏名（姓）\t"
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userNameFirst
+          description: "氏名（名）\t"
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userKanaLast
+          description: "カナ（姓）\t"
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userKanaFirst
+          description: "カナ（名）\t"
+          required: true
+        - schema:
+            type: string
+            format: date
+            pattern: YYYY-MM-DD
+          in: query
+          name: userBirth
+          description: "生年月日\t"
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userPostal
+          description: "郵便番号\t"
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userAddress
+          description: 住所
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userPhone
+          description: 電話番号
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userLicense
+          description: 免許証番号
+          required: true
+        - schema:
+            type: string
+            format: date
+            pattern: YYYY-MM-DD
+          in: query
+          name: userExpire
+          description: "免許有効期限\t"
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userBankCode
+          description: 金融機関コード
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userBankBranch
+          description: 支店番号
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userBankType
+          description: "預金種目\t"
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userBankNumber
+          description: "口座番号\t"
+          required: true
+        - schema:
+            type: string
+            pattern: カタカナ
+          in: query
+          name: userBankName
+          description: 口座名義
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userBankPost
+          description: 記号（郵貯）
     put:
       summary: ユーザー個人情報変更
       operationId: put-register-account
@@ -202,6 +314,8 @@ paths:
         '200':
           description: OK
       description: ''
+      tags:
+        - 検索条件保存
   '/search/{searchCode}/':
     parameters:
       - schema:
@@ -225,25 +339,49 @@ paths:
           description: OK
       tags:
         - 検索条件保存
-  /offer/price/:
+  '/offer/price/{exhibitCode}/':
     post:
       summary: 価格相談申込
       operationId: post-offer-price
       responses:
         '200':
           description: OK
+        '406':
+          description: 既に価格交渉の依頼済み
       tags:
         - 交渉
-  /offer/:
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: offerPrice
+          description: 交渉価格
+          required: true
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
+  '/offer/{exhibitCode}/':
     post:
       summary: 購入依頼
       operationId: post-offer
       responses:
         '200':
           description: OK
+        '406':
+          description: 既に購入依頼済み
       tags:
         - 交渉
-  /offer/ok/:
+      description: ''
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
+  '/offer/ok/{exhibitCode}/':
     post:
       summary: 売却承諾
       operationId: post-offer-ok
@@ -252,7 +390,13 @@ paths:
           description: OK
       tags:
         - 交渉
-  /offer/ng/:
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
+  '/offer/ng/{exhibitCode}/':
     post:
       summary: 売却拒否
       operationId: post-offer-ng
@@ -261,6 +405,12 @@ paths:
           description: OK
       tags:
         - 交渉
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
   '/transact/receive/{transactCode}/':
     parameters:
       - schema:
@@ -370,7 +520,15 @@ paths:
       summary: 取引メッセージ一覧
       tags:
         - 取引
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./Message.v1.yaml
       operationId: get-message-transactCode
     post:
       summary: 取引メッセージ作成
@@ -378,8 +536,20 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./Message.v1.yaml
       tags:
         - 取引
+      description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: messageText
+          description: 本文
+          required: true
   /exhibit/:
     get:
       summary: 出品情報検索
@@ -553,10 +723,29 @@ paths:
   /inform/:
     get:
       summary: 全体お知らせ一覧
-      tags:
-        - 全体お知らせ
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                  offset:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: ''
+                required:
+                  - count
+                  - offset
+                  - data
       operationId: get-inform
+      tags:
+        - お知らせ
   '/inform/{informCode}/':
     parameters:
       - schema:
@@ -566,18 +755,32 @@ paths:
         required: true
     get:
       summary: 全体お知らせ取得
-      tags:
-        - 全体お知らせ
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./Inform.v1.yaml
       operationId: get-inform-informCode
+      tags:
+        - お知らせ
   /notify/:
     get:
       summary: 自分宛お知らせ一覧
-      tags:
-        - あなた宛お知らせ
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./Notify.v1.yaml
       operationId: get-notify
       description: ''
+      tags:
+        - お知らせ
   '/notify/{notifyCode}/':
     parameters:
       - schema:
@@ -587,10 +790,16 @@ paths:
         required: true
     get:
       summary: 貴方宛お知らせ取得
-      tags:
-        - あなた宛お知らせ
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./Notify.v1.yaml
       operationId: get-notify-notifyCode
+      tags:
+        - お知らせ
   /init/:
     get:
       summary: 初期化処理
@@ -621,6 +830,10 @@ paths:
                         type: array
                         items:
                           $ref: ./Exhibit.v1.yaml
+                  toDo:
+                    type: array
+                    items:
+                      $ref: ./ToDo.v1.yaml
                 required:
                   - userKey
                   - exhibit

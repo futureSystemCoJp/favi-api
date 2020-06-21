@@ -1,0 +1,20 @@
+title: 全体お知らせデータ
+type: object
+properties:
+  informCode:
+    type: number
+  informSubject:
+    type: string
+    description: タイトル
+  informCreate:
+    type: string
+    description: 作成時刻
+  informContent:
+    type:
+      - string
+      - 'null'
+    description: 本文（一覧では存在しない）
+required:
+  - informCode
+  - informSubject
+  - informCreate

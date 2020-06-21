@@ -1,0 +1,22 @@
+title: 取引メッセージ
+type: object
+properties:
+  messageCode:
+    type: number
+  messageMine:
+    type: boolean
+    description: 自分からのメッセージであるか
+  messageOpened:
+    type:
+      - string
+      - 'null'
+    description: 開封時刻
+  messageCreate:
+    type: string
+    description: 送信時刻
+  messageText:
+    type: string
+    description: 本文
+required:
+  - messageCode
+  - messageMine
