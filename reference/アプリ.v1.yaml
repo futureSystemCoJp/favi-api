@@ -77,11 +77,11 @@ paths:
       tags:
         - やる事
       description: 全て一覧で表示
-  '/user/{$id}/':
+  '/user/{userCode}/':
     parameters:
       - schema:
           type: string
-        name: $id
+        name: userCode
         in: path
         required: true
     get:
@@ -165,7 +165,9 @@ paths:
                   - userNickName
                   - userProfile
                   - transactCancel
+                  - reviews
       operationId: get-user-$id
+      description: ''
   /coupon/:
     get:
       summary: 所有クーポン一覧
@@ -750,6 +752,34 @@ paths:
                       $ref: ./Exhibit.v1.yaml
       operationId: get-exhibit
       description: ''
+    post:
+      summary: 出品情報登録
+      operationId: post-exhibit
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: exhibitCarType
+          description: 車種ID
+          required: true
+        - schema:
+            type: number
+          in: query
+          name: exhibitNumber
+          description: "型式指定番号\t"
+          required: true
+        - schema:
+            type: number
+          in: query
+          name: exhibitSection
+          description: "類別区分番号\t"
+          required: true
+      description: |-
+        取引内容を登録。車両情報を読み込んだ時点で自動的に送信する。
+        下書き状態として登録する
   '/exhibit/{exhibitCode}/':
     parameters:
       - schema:
@@ -772,6 +802,120 @@ paths:
           description: OK
       tags:
         - 出品情報
+      description: ''
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: exhibitGrade
+          description: "グレードID\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitGear
+          description: "駆動種別\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitMission
+          description: "ミッション種別\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitHandle
+          description: "ハンドル種別\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitRegisterYear
+          description: "初年度登録(年)\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitRegisterMonth
+          description: "初年度登録(月)\t"
+        - schema:
+            type: string
+            format: date
+            pattern: YYYY-MM-DD
+          in: query
+          name: exhibitPaperExpire
+          description: "車検有効期限\t"
+        - schema:
+            type: string
+          in: query
+          name: exhibitNumberPlace
+          description: "ナンバー試験場\t"
+        - schema:
+            type: string
+          in: query
+          name: exhibitNumberGroup
+          description: "ナンバー上3桁\t"
+        - schema:
+            type: string
+          in: query
+          name: exhibitNumberKana
+          description: "ナンバーかな\t"
+        - schema:
+            type: string
+          in: query
+          name: exhibitNumberCode
+          description: "ナンバー下4桁\t"
+        - schema:
+            type: string
+          in: query
+          name: exhibitCarNumber
+          description: "車体番号\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitByeYear
+          description: "購入年\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitByeMonth
+          description: "購入月\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitDistanceSum
+          description: "走行距離合計\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitDistanceMonth
+          description: "月間走行距離\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitBodyColor
+          description: "ボディカラー種別\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitBodyColorSub
+          description: "サブカラー種別\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitRepair
+          description: 修復履歴フラグ
+        - schema:
+            type: number
+          in: query
+          name: exhibitSmoking
+          description: "喫煙フラグ\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitPet
+          description: "ペット乗車フラグ\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitReport
+          description: "整備記録簿フラグ\t"
   /exhibit/price/:
     get:
       summary: 価格分布取得
