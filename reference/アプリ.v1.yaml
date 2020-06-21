@@ -649,6 +649,7 @@ paths:
           name: documentImage
           description: 画像バイナリ
           required: true
+      description: 取引に必要な書類をアップロードする
     put:
       summary: 書類受取完了報告
       operationId: put-transact-document-transactCode
@@ -657,6 +658,7 @@ paths:
           description: OK
       tags:
         - 取引
+      description: ''
   '/transact/complete/{transactCode}/':
     parameters:
       - schema:
@@ -780,6 +782,8 @@ paths:
       description: |-
         取引内容を登録。車両情報を読み込んだ時点で自動的に送信する。
         下書き状態として登録する
+      tags:
+        - 出品情報
   '/exhibit/{exhibitCode}/':
     parameters:
       - schema:
@@ -791,7 +795,243 @@ paths:
       summary: 出品情報詳細
       tags:
         - 出品情報
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                description: ''
+                properties:
+                  exhibitCode:
+                    type: number
+                    description: "出品ID\t"
+                  exhibitPrice:
+                    type: number
+                    description: "販売価格\t"
+                  carTypeCode:
+                    type: number
+                    description: "車種ID\t"
+                  carTypeName:
+                    type: string
+                    description: 車種名
+                  gradeName:
+                    type: string
+                    description: グレード名
+                  exhibitGear:
+                    type: number
+                    description: "駆動種別\t"
+                  exhibitMission:
+                    type: number
+                    description: "ミッション種別\t"
+                  exhibitRegisterYear:
+                    type: number
+                    description: "初年度登録(年)\t"
+                  exhibitRegisterMonth:
+                    type: number
+                    description: "初年度登録(月)\t"
+                  exhibitPaperExpire:
+                    type:
+                      - string
+                      - 'null'
+                    description: 車検有効期限（切れた場合null）
+                  exhibitByeYear:
+                    type: number
+                    description: "購入年\t"
+                  exhibitByeMonth:
+                    type: number
+                    description: "購入月\t"
+                  exhibitDistanceSum:
+                    type: number
+                    description: "走行距離合計\t"
+                  exhibitDistanceMonth:
+                    type: number
+                    description: "月間走行距離\t"
+                  exhibitBodyColor:
+                    type: number
+                    description: "ボディカラー種別\t"
+                  exhibitBodyColorSub:
+                    type: number
+                    description: "サブカラー種別\t"
+                  exhibitRepair:
+                    type: number
+                    description: "修復履歴フラグ\t"
+                  exhibitSmoking:
+                    type: number
+                    description: "喫煙フラグ\t"
+                  exhibitPet:
+                    type: number
+                    description: "ペット乗車フラグ\t"
+                  exhibitReport:
+                    type: number
+                    description: "整備記録簿フラグ\t"
+                  exhibitOutPoint:
+                    type: number
+                    description: "外装評価点数\t"
+                  exhibitInPoint:
+                    type: number
+                    description: "内装評価点数\t"
+                  exhibitCopy:
+                    type:
+                      - string
+                      - 'null'
+                    description: "オススメポイント\t"
+                  exhibitDetail:
+                    type:
+                      - string
+                      - 'null'
+                    description: "詳細説明\t"
+                  exhibitSendBy:
+                    type: number
+                    description: "引き渡し種別\t"
+                  exhibitPlacePref:
+                    type: string
+                    description: "都道府県\t"
+                  exhibitPlaceCity:
+                    type: string
+                    description: "市区町村\t"
+                  exhibitPlaceText:
+                    type: string
+                    description: "引渡し場所\t"
+                  exhibitNegotiate:
+                    type: number
+                    description: "交渉可否フラグ\t"
+                  exhibitPurchase:
+                    type: number
+                    description: "業者買取予想価格\t"
+                  exhibitMarket:
+                    type: number
+                    description: "業者販売予想価格\t"
+                  install:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        equipmentCode:
+                          type: number
+                          description: 装備ID
+                        equipmentName:
+                          type: string
+                          description: 装備名
+                        equipmentGroup:
+                          type: number
+                          description: 装備種別
+                      required:
+                        - equipmentCode
+                        - equipmentName
+                        - equipmentGroup
+                  photo:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        photoIndex:
+                          type: number
+                          description: 写真番号index
+                        photoParts:
+                          type: number
+                          description: 写真箇所種別
+                        photoComment:
+                          type: string
+                          description: 写真コメント
+                      required:
+                        - photoIndex
+                        - photoParts
+                        - photoComment
+                  damage:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        damageSection:
+                          type: number
+                          description: "問題箇所種別\t"
+                        damageDescription:
+                          type: string
+                          description: "問題テキスト\t"
+                      required:
+                        - damageSection
+                        - damageDescription
+                  user:
+                    type:
+                      - string
+                      - object
+                    required:
+                      - userCode
+                      - userNickName
+                      - userProfile
+                    properties:
+                      userCode:
+                        type: number
+                        description: ユーザーID
+                      userNickName:
+                        type: string
+                        description: ニックネーム
+                      reviewPolite:
+                        type:
+                          - number
+                          - 'null'
+                        description: 誠実さ（5点満点）
+                      reviewQuick:
+                        type:
+                          - number
+                          - 'null'
+                        description: 早さ（5点満点）
+                      userProfile:
+                        type: string
+                        description: 自己紹介文
+                  comment:
+                    type: object
+                    required:
+                      - count
+                      - offset
+                      - data
+                    description: この取引のコメント
+                    properties:
+                      count:
+                        type: number
+                      offset:
+                        type: number
+                      data:
+                        type: array
+                        items:
+                          $ref: ./Comment.v1.yaml
+                required:
+                  - exhibitCode
+                  - exhibitPrice
+                  - carTypeCode
+                  - carTypeName
+                  - gradeName
+                  - exhibitGear
+                  - exhibitMission
+                  - exhibitRegisterYear
+                  - exhibitRegisterMonth
+                  - exhibitPaperExpire
+                  - exhibitByeYear
+                  - exhibitByeMonth
+                  - exhibitDistanceSum
+                  - exhibitDistanceMonth
+                  - exhibitBodyColor
+                  - exhibitBodyColorSub
+                  - exhibitRepair
+                  - exhibitSmoking
+                  - exhibitPet
+                  - exhibitReport
+                  - exhibitOutPoint
+                  - exhibitInPoint
+                  - exhibitSendBy
+                  - exhibitPlacePref
+                  - exhibitPlaceCity
+                  - exhibitPlaceText
+                  - exhibitNegotiate
+                  - exhibitPurchase
+                  - exhibitMarket
+                  - install
+                  - photo
+                  - damage
+                  - user
+                  - comment
       operationId: get-exhibit-exhivitCode
       description: ''
     put:
@@ -802,7 +1042,9 @@ paths:
           description: OK
       tags:
         - 出品情報
-      description: ''
+      description: |-
+        入力された値を出品情報に対して更新する。
+        設定されたパラメータのみ更新されるので、各画面から入力された物を保存する。
       parameters:
         - schema:
             type: number
@@ -1200,9 +1442,31 @@ paths:
                     type: array
                     items:
                       $ref: ./ToDo.v1.yaml
+                  inform:
+                    type: object
+                    required:
+                      - count
+                      - offset
+                      - data
+                    properties:
+                      count:
+                        type: number
+                      offset:
+                        type: number
+                      data:
+                        type: array
+                        items:
+                          $ref: ./Inform.v1.yaml
+                  notify:
+                    type: array
+                    items:
+                      $ref: ''
                 required:
                   - userKey
                   - exhibit
+                  - toDo
+                  - inform
+                  - notify
       operationId: get-init
       description: |-
         このAPIはアプリ起動時に必ず一度呼ばれるAPIです。
@@ -1225,6 +1489,55 @@ paths:
           in: query
           name: userDeviceID
           description: "Android : android ID , \niOS : 広告ID"
+  '/comment/{exhibitCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
+    get:
+      summary: 取引コメント取得
+      tags:
+        - コメント
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                  offset:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: ./Comment.v1.yaml
+      operationId: get-comment-exhibitCode
+      description: ''
+    post:
+      summary: コメント投稿
+      operationId: post-comment-exhibitCode
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./Comment.v1.yaml
+      description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: commentText
+          description: "本文\t"
+          required: true
+      tags:
+        - コメント
 components:
   schemas: {}
   securitySchemes:

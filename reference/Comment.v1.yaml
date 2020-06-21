@@ -1,0 +1,27 @@
+title: 取引コメント
+type: object
+properties:
+  commentCode:
+    type: string
+    description: コメントID
+  commentText:
+    type: string
+    description: 本文
+  commentCreate:
+    type: string
+    description: 送信時刻
+  commentRead:
+    type:
+      - string
+      - 'null'
+    description: 既読時刻
+  commentUser:
+    type: number
+    description: 書込みを行ったユーザーID
+required:
+  - commentCode
+  - commentText
+  - commentCreate
+  - commentUser
+x-tags:
+  - コメント
