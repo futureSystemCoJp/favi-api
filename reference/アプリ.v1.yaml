@@ -5,6 +5,9 @@ info:
   description: |-
     ##### アプリからコールされるAPI
     サーバーから返却されたユーザーキーをヘッダーに加えてリクエストして下さい。
+
+    項目がフラグの場合、 1:true 0:false として扱って下さい。
+    項目が種別の場合、種別データ定義を参照して下さい。
 servers:
   - url: 'https://d32rxh06xfiiaj.cloudfront.net/api/v1'
     description: 開発版

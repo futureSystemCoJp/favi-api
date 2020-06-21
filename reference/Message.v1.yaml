@@ -20,3 +20,4 @@ properties:
 required:
   - messageCode
   - messageMine
+description: ''
