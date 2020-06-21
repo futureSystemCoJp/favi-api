@@ -916,6 +916,51 @@ paths:
           in: query
           name: exhibitReport
           description: "整備記録簿フラグ\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitOutPoint
+          description: "外装評価点数\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitInPoint
+          description: "内装評価点数\t"
+        - schema:
+            type: string
+          in: query
+          name: exhibitCopy
+          description: "オススメポイント\t"
+        - schema:
+            type: string
+          in: query
+          name: exhibitDetail
+          description: "詳細説明\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitSendBy
+          description: "引き渡し種別\t"
+        - schema:
+            type: string
+          in: query
+          name: exhibitPlacePref
+          description: 都道府県
+        - schema:
+            type: string
+          in: query
+          name: exhibitPlaceCity
+          description: "市区町村\t"
+        - schema:
+            type: string
+          in: query
+          name: exhibitPlaceText
+          description: "引渡し場所\t"
+        - schema:
+            type: number
+          in: query
+          name: exhibitNegotiate
+          description: "交渉可否フラグ\t"
   /exhibit/price/:
     get:
       summary: 価格分布取得
