@@ -1,0 +1,16 @@
+openapi: 3.0.0
+info:
+  title: やる事
+  version: '1.0'
+servers:
+  - url: 'https://d32rxh06xfiiaj.cloudfront.net/api/v1'
+    description: 開発版
+paths:
+  /toDo/:
+    get:
+      summary: やる事リスト一覧
+      tags: []
+      responses: {}
+      operationId: get-toDo
+components:
+  schemas: {}

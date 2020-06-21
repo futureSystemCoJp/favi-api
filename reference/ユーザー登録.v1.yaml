@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: ユーザー登録
+  version: '1.0'
+servers:
+  - url: 'https://d32rxh06xfiiaj.cloudfront.net/api/v1'
+    description: 開発版
+paths:
+  /register/email/:
+    post:
+      summary: メールアドレス仮登録
+      operationId: post-register-email
+      responses:
+        '200':
+          description: OK
+  /register/account/:
+    post:
+      summary: ユーザー個人情報登録
+      operationId: post-register-account
+      responses:
+        '200':
+          description: OK
+    put:
+      summary: ユーザー個人情報変更
+      operationId: put-register-account
+      responses:
+        '200':
+          description: OK
+  /register/profile/:
+    post:
+      summary: プロフィール登録
+      operationId: post-register-profile
+      responses:
+        '200':
+          description: OK
+      description: ''
+    put:
+      summary: プロフィール変更
+      operationId: put-register-profile
+      responses:
+        '200':
+          description: OK
+components:
+  schemas: {}

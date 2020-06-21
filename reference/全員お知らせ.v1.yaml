@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  title: お知らせ
+  version: '1.0'
+servers:
+  - url: 'https://d32rxh06xfiiaj.cloudfront.net/api/v1'
+    description: 開発版
+paths:
+  /inform/:
+    get:
+      summary: 全体お知らせ一覧
+      tags: []
+      responses: {}
+      operationId: get-inform
+  '/inform/{informCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: informCode
+        in: path
+        required: true
+    get:
+      summary: 全体お知らせ取得
+      tags: []
+      responses: {}
+      operationId: get-inform-informCode
+  /notify/:
+    get:
+      summary: 自分宛お知らせ一覧
+      tags: []
+      responses: {}
+      operationId: get-notify
+      description: ''
+  '/notify/{notifyCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: notifyCode
+        in: path
+        required: true
+    get:
+      summary: 貴方宛お知らせ取得
+      tags: []
+      responses: {}
+      operationId: get-notify-notifyCode
+components:
+  schemas: {}

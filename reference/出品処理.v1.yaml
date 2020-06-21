@@ -3,7 +3,8 @@ info:
   title: 出品処理
   version: '1.0'
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'https://d32rxh06xfiiaj.cloudfront.net/api/v1'
+    description: 開発版
 paths:
   /exhibit/:
     get:
@@ -46,6 +47,34 @@ paths:
       responses:
         '200':
           description: OK
+  /exhibit/price/:
+    get:
+      summary: 価格分布取得
+      tags: []
+      responses: {}
+      operationId: get-exhibit-price
+      description: ''
+  /history/:
+    get:
+      summary: 閲覧履歴一覧
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                  offset:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Exhibit'
+      operationId: get-history
 components:
   schemas:
     Exhibit:
@@ -56,5 +85,3 @@ components:
           type: number
         exhibitPrice:
           type: number
-        '':
-          type: string
