@@ -763,6 +763,71 @@ paths:
           in: query
           name: mine
           description: 自身の出品フラグ
+        - schema:
+            type: number
+          in: query
+          name: carTypeCode
+          description: 車種ID
+        - schema:
+            type: number
+          in: query
+          name: gradeCode
+          description: グレードID
+        - schema:
+            type: number
+          in: query
+          name: exhibitPriceMin
+          description: 車両価格下限
+        - schema:
+            type: number
+          in: query
+          name: exhibitPriceMax
+          description: 車両価格上限
+        - schema:
+            type: number
+          in: query
+          name: profitMin
+          description: お得価格下限
+        - schema:
+            type: number
+          in: query
+          name: profitMax
+          description: お得価格上限
+        - schema:
+            type: number
+          in: query
+          name: yearMin
+          description: 年式下限
+        - schema:
+            type: number
+          in: query
+          name: yearMax
+          description: 年式上限
+        - schema:
+            type: number
+          in: query
+          name: distanceMin
+          description: 走行距離下限
+        - schema:
+            type: number
+          in: query
+          name: distanceMax
+          description: 走行距離上限
+        - schema:
+            type: number
+          in: query
+          name: prefCode
+          description: 都道府県種別
+        - schema:
+            type: number
+          in: query
+          name: expireMin
+          description: 車検残下限
+        - schema:
+            type: number
+          in: query
+          name: expireMax
+          description: 車検残上限
     post:
       summary: 出品情報登録
       operationId: post-exhibit
@@ -1287,13 +1352,10 @@ paths:
                   - price
                   - value
       operationId: get-exhibit-price
-      description: 選択された車種（任意）の車両価格の分布を返却する
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: carTypeCode
-          description: 車種ID
+      description: |-
+        選択された車種（任意）の車両価格の分布を返却する。
+        出品情報検索APIと同じクエリパラメータを受け入れる。
+      parameters: []
   /history/:
     get:
       summary: 閲覧履歴一覧
@@ -1681,10 +1743,10 @@ paths:
                     type: number
                     description: ヒット件数
       operationId: get-exhibit-count
-      parameters:
-        - schema: {}
-          in: query
-          description: 検索条件
+      parameters: []
+      description: |-
+        絞り込み条件に合致する、有効な出品件数を取得する。
+        出品情報検索APIと同じクエリパラメータを受け入れる。
   '/report/{exhibitCode}/':
     parameters:
       - schema:
