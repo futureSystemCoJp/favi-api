@@ -757,6 +757,12 @@ paths:
                       $ref: ./Exhibit.v1.yaml
       operationId: get-exhibit
       description: ''
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: mine
+          description: 自身の出品フラグ
     post:
       summary: 出品情報登録
       operationId: post-exhibit
@@ -1707,6 +1713,156 @@ paths:
           name: reportDetail
           description: 報告詳細
           required: true
+  /user/logout/:
+    get:
+      summary: ログアウト処理
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userKey:
+                    type: string
+                    description: ユーザーキー
+      operationId: get-user-logout
+      tags:
+        - ユーザー関連
+  /transact/:
+    get:
+      summary: 取引一覧
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./Exhibit.v1.yaml
+      operationId: get-transact
+  '/transact/{transactCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: transactCode
+        in: path
+        required: true
+    delete:
+      summary: 取引キャンセル
+      operationId: delete-transact-transactCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 取引
+  '/transact/post/{transactCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: transactCode
+        in: path
+        required: true
+    post:
+      summary: 書類発送通知
+      operationId: post-transact-post-transactCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 取引
+  '/transact/review/{transactCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: transactCode
+        in: path
+        required: true
+    post:
+      summary: 評価投稿
+      operationId: post-transact-review-transactCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 取引
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: reviewPolite
+          description: 丁寧度点数
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: reviewQuick
+          description: スピード点数
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: reviewMessage
+          description: 評価本文
+  /carType/market/:
+    get:
+      summary: 相場取得
+      tags:
+        - マスタ
+      operationId: get-carType-market
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: carTypeCode
+          description: 車種ID
+        - schema:
+            type: number
+          in: query
+          name: gradeCode
+          description: グレードID
+        - schema:
+            type: number
+          in: query
+          name: carTypeYear
+          description: 年式（年）
+        - schema:
+            type: number
+          in: query
+          name: carTypeMonth
+          description: 年式(月)
+        - schema:
+            type: number
+          in: query
+          name: carTypeDistance
+          description: 走行距離
+        - schema:
+            type: number
+          in: query
+          name: carExpireYear
+          description: 車検期限（年）
+        - schema:
+            type: number
+          in: query
+          name: carExpireMonth
+          description: 車検期限（月）
+        - schema:
+            type: number
+          in: query
+          name: carCleanIn
+          description: 内装点数
+        - schema:
+            type: number
+          in: query
+          name: carCleanOut
+          description: 外装点数
+      responses:
+        '200':
+          description: OK
+      description: レスポンスフォーマット未定
 components:
   schemas: {}
   securitySchemes:
