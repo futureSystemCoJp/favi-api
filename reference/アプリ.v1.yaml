@@ -1679,6 +1679,34 @@ paths:
         - schema: {}
           in: query
           description: 検索条件
+  '/report/{exhibitCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
+    put:
+      summary: 通報
+      operationId: put-report-exhibitCode
+      tags:
+        - 出品情報
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: reportReason
+          description: 報告理由種別
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: reportDetail
+          description: 報告詳細
+          required: true
 components:
   schemas: {}
   securitySchemes:
