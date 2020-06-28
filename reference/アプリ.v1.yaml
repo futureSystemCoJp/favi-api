@@ -1609,6 +1609,12 @@ paths:
                     - exhibits
       operationId: get-carType
       description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: makerCode
+          description: メーカーID
   /maker/:
     get:
       summary: メーカー一覧
@@ -1646,6 +1652,33 @@ paths:
                     - exhibits
                     - makerPopular
       operationId: get-maker
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: makerCountry
+          description: 国種別
+  /exhibit/count/:
+    get:
+      summary: 検索ヒット数取得
+      tags:
+        - 出品情報
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hit:
+                    type: number
+                    description: ヒット件数
+      operationId: get-exhibit-count
+      parameters:
+        - schema: {}
+          in: query
+          description: 検索条件
 components:
   schemas: {}
   securitySchemes:
