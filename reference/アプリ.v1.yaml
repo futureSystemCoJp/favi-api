@@ -1571,6 +1571,64 @@ paths:
                     - tagType
       operationId: get-tag
       description: タグ一覧を取得する
+  /carType/:
+    get:
+      summary: 車種一覧
+      tags:
+        - マスタ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    carTypeCode:
+                      type: number
+                      description: 車種ID
+                    carTypeName:
+                      type: string
+                      description: 車種名
+                    carTypeBody:
+                      type: number
+                      description: ボディタイプ種別
+                    carTypeMaker:
+                      type: number
+                      description: メーカーID
+                  required:
+                    - carTypeCode
+                    - carTypeName
+                    - carTypeBody
+                    - carTypeMaker
+      operationId: get-carType
+  /maker/:
+    get:
+      summary: メーカー一覧
+      tags:
+        - マスタ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    makerCode:
+                      type: number
+                      description: メーカーID
+                    makerName:
+                      type: string
+                      description: メーカー名
+                    makerCountry:
+                      type: number
+                      description: 国種別
+      operationId: get-maker
 components:
   schemas: {}
   securitySchemes:
