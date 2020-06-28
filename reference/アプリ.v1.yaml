@@ -1733,7 +1733,8 @@ paths:
   /transact/:
     get:
       summary: 取引一覧
-      tags: []
+      tags:
+        - 取引
       responses:
         '200':
           description: OK
