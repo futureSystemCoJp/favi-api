@@ -1863,6 +1863,45 @@ paths:
         '200':
           description: OK
       description: レスポンスフォーマット未定
+  /grade/:
+    get:
+      summary: グレード一覧
+      tags:
+        - マスタ
+      responses: {}
+      operationId: get-grade
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: gradeCarType
+          description: 車種ID
+          required: true
+  /equipment/:
+    get:
+      summary: 装備一覧取得
+      tags:
+        - マスタ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipementCode:
+                      type: number
+                      description: 装備ID
+                    equipementName:
+                      type: string
+                      description: 装備名
+                    equipementType:
+                      type: number
+                      description: 装備種別
+      operationId: get-equipment
 components:
   schemas: {}
   securitySchemes:
