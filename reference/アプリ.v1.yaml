@@ -1628,6 +1628,9 @@ paths:
                     makerCountry:
                       type: number
                       description: 国種別
+                    exhibits:
+                      type: number
+                      description: 有効な出品総数
       operationId: get-maker
 components:
   schemas: {}
