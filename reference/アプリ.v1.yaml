@@ -1541,6 +1541,36 @@ paths:
           required: true
       tags:
         - コメント
+  /tag/:
+    get:
+      summary: タグ一覧
+      tags:
+        - 出品情報
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tagCode:
+                      type: number
+                      description: タグID
+                    tagName:
+                      type: string
+                      description: タグ名称
+                    tagType:
+                      type: number
+                      description: タグ種別
+                  required:
+                    - tagCode
+                    - tagName
+                    - tagType
+      operationId: get-tag
+      description: タグ一覧を取得する
 components:
   schemas: {}
   securitySchemes:
