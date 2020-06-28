@@ -1598,12 +1598,17 @@ paths:
                     carTypeMaker:
                       type: number
                       description: メーカーID
+                    exhibits:
+                      type: number
+                      description: 有効な出品総数
                   required:
                     - carTypeCode
                     - carTypeName
                     - carTypeBody
                     - carTypeMaker
+                    - exhibits
       operationId: get-carType
+      description: ''
   /maker/:
     get:
       summary: メーカー一覧
@@ -1631,6 +1636,15 @@ paths:
                     exhibits:
                       type: number
                       description: 有効な出品総数
+                    makerPopular:
+                      type: number
+                      description: 人気フラグ
+                  required:
+                    - makerCode
+                    - makerName
+                    - makerCountry
+                    - exhibits
+                    - makerPopular
       operationId: get-maker
 components:
   schemas: {}
