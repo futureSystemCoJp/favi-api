@@ -220,7 +220,7 @@ paths:
       description: |-
         入力されたメールアドレスに仮登録のメールを送信する。
         登録済みのメールアドレスでも成功します。
-  /register/account/:
+  '/register/account/{userCode}/':
     post:
       summary: ユーザー個人情報登録
       operationId: post-register-account
@@ -335,14 +335,13 @@ paths:
       description: |-
         金融機関コードが9900（ゆうちょ銀行）の場合、userBankPostは必須。
         それ以外の場合、userBankTypeは必須。
-    put:
-      summary: ユーザー個人情報変更
-      operationId: put-register-account
-      responses:
-        '200':
-          description: OK
-      tags:
-        - ユーザー登録
+    parameters:
+      - schema:
+          type: string
+        name: userCode
+        in: path
+        required: true
+        description: ユーザーID（メールアドレス認証APIに付与）
   /register/profile/:
     post:
       summary: プロフィール変更
@@ -1559,7 +1558,9 @@ paths:
             type: string
           in: query
           name: userDeviceID
-          description: "Android : android ID , \niOS : 広告ID"
+          description: |-
+            Android : android ID , 
+            iOS : 広告ID
   '/comment/{exhibitCode}/':
     parameters:
       - schema:
@@ -1965,6 +1966,41 @@ paths:
                       type: number
                       description: 装備種別
       operationId: get-equipment
+  /register/veryify/:
+    post:
+      summary: メールアドレス認証API
+      operationId: post-register-veryify
+      responses:
+        '200':
+          description: 成功したのでユーザーIDを返す。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userCode:
+                    type: string
+                    description: ユーザーID
+                required:
+                  - userCode
+        '400':
+          description: メールアドレスが存在しないか、数字6桁が一致しない
+      description: |-
+        仮登録メールに記載されたランダムな数字とメールアドレスを基に
+        ユーザー登録を行う。
+
+        戻り値として、ユーザーID　userCode を返す。
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: userEmail
+          description: メールアドレス
+        - schema:
+            type: string
+          in: query
+          name: tempPass
+          description: メール記載の数字6桁
 components:
   schemas: {}
   securitySchemes:
