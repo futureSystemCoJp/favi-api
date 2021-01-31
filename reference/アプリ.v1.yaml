@@ -3,10 +3,10 @@ info:
   title: アプリAPI
   version: '1.0'
   description: |-
-    ##### アプリからコールされるAPI
+    ## アプリからコールされるAPI
     サーバーから返却されたユーザーキーをヘッダーに加えてリクエストして下さい。
 
-    @see 
+    ### @see 
     「メールアドレス認証API」
 
 
@@ -224,7 +224,9 @@ paths:
       description: |-
         入力されたメールアドレスに仮登録のメールを送信する。
         登録済みのメールアドレスでも成功します。
-  '/register/account/{userCode}/':
+
+        ↓ このAPIは、認証は不要です
+  /register/account/:
     post:
       summary: ユーザー個人情報登録
       operationId: post-register-account
@@ -341,20 +343,14 @@ paths:
       description: |-
         金融機関コードが9900（ゆうちょ銀行）の場合、userBankPostは必須。
         それ以外の場合、userBankTypeは必須。
-    parameters:
-      - schema:
-          type: string
-        name: userCode
-        in: path
-        required: true
-        description: ユーザーID（メールアドレス認証APIに付与）
+    parameters: []
   /register/profile/:
     post:
       summary: プロフィール変更
       operationId: post-register-profile
       responses:
-        '200':
-          description: OK
+        '302':
+          description: Found
       description: ''
       tags:
         - ユーザー登録
@@ -1984,21 +1980,25 @@ paths:
               schema:
                 type: object
                 properties:
-                  userKey:
+                  apiKey:
                     type: string
                     description: ユーザーキー
                 required:
-                  - userKey
+                  - apiKey
         '400':
           description: メールアドレスが存在しないか、数字6桁が一致しない
       description: |-
         仮登録メールに記載されたランダムな数字とメールアドレスを基に
         ユーザー登録を行う。
 
+        ### 重要
         戻り値として、ユーザーキー （ userKey ) を返す。
 
         ユーザーキーは自分のIDなので、アプリで保存してください。
         今後、他のAPIを使う際には、ユーザーキーを必ずヘッダーに加えて下さい
+
+
+        ↓ このAPIは、認証は不要です
       parameters:
         - schema:
             type: string
@@ -2025,12 +2025,137 @@ paths:
       tags:
         - ユーザー登録
     parameters: []
+  /register/google/:
+    post:
+      summary: Googleで登録
+      operationId: post-register-google
+      responses:
+        '200':
+          description: 会員の仮登録が行われた
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  apiKey:
+                    type: string
+                    description: ユーザーキー
+        '302':
+          description: |-
+            既に会員登録が済んでいるユーザー
+            ログインされたものと同じように扱って下さい
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  apiKey:
+                    type: string
+                    description: ユーザーキー
+                required:
+                  - apiKey
+      description: |-
+        Googleでログイン or 会員登録する
+        この APIを通すとメールアドレス認証のフローをスキップできる
+
+        ### フロー
+        - 200 会員登録フローを続ける
+        - 302 既に登録済み（機種変更など）なのでログインした扱い
+
+        ### 重要
+        戻り値として、ユーザーキー （ userKey ) を返す。
+
+        ユーザーキーは自分のIDなので、アプリで保存してください。
+        今後、他のAPIを使う際には、ユーザーキーを必ずヘッダーに加えて下さい
+
+
+        ↓ このAPIは、認証は不要です
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: userGoogle
+          description: Google認証で取得したID
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userEmail
+          description: メールアドレス
+      tags:
+        - ユーザー登録
+  /register/face-book/:
+    post:
+      summary: FaceBookで登録
+      operationId: post-register-face-book
+      responses:
+        '200':
+          description: 会員の仮登録が行われた
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  apiKey:
+                    type: string
+                    description: ユーザーキー
+                required:
+                  - apiKey
+        '302':
+          description: |-
+            既に会員登録が済んでいるユーザー
+            ログインされたものと同じように扱って下さい
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  apiKey:
+                    type: string
+                    description: ユーザーキー
+                required:
+                  - apiKey
+      tags:
+        - ユーザー登録
+      description: |-
+        FaceBookでログイン or 会員登録する
+        この APIを通すとメールアドレス認証のフローをスキップできる
+
+
+        ### フロー
+        - 200 会員登録フローを続ける
+        - 302 既に登録済み（機種変更など）なのでログインした扱い
+
+
+        ### 重要
+        戻り値として、ユーザーキー （ userKey ) を返す。
+
+        ユーザーキーは自分のIDなので、アプリで保存してください。
+        今後、他のAPIを使う際には、ユーザーキーを必ずヘッダーに加えて下さい
+
+
+        ↓ このAPIは、認証は不要です
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: userFaceBook
+          description: FaceBook認証で取得するキー
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userEmail
+          description: メールアドレス
 components:
   schemas: {}
   securitySchemes:
     ユーザーキー:
-      name: userKey
+      name: apiKey
       type: apiKey
       in: header
+      description: ''
 tags:
   - name: ユーザー登録
+security:
+  - ユーザーキー: []
