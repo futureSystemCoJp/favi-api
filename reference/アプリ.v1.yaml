@@ -6,6 +6,10 @@ info:
     ##### アプリからコールされるAPI
     サーバーから返却されたユーザーキーをヘッダーに加えてリクエストして下さい。
 
+    @see 
+    「メールアドレス認証API」
+
+
     項目がフラグの場合、 1:true 0:false として扱って下さい。
     項目が種別の場合、種別データ定義を参照して下さい。
 servers:
@@ -227,6 +231,8 @@ paths:
       responses:
         '200':
           description: OK
+        '404':
+          description: ユーザーIDが存在しない
       tags:
         - ユーザー登録
       parameters:
@@ -1966,7 +1972,7 @@ paths:
                       type: number
                       description: 装備種別
       operationId: get-equipment
-  /register/veryify/:
+  /register/verify/:
     post:
       summary: メールアドレス認証API
       operationId: post-register-veryify
@@ -1978,31 +1984,47 @@ paths:
               schema:
                 type: object
                 properties:
-                  userCode:
+                  userKey:
                     type: string
-                    description: ユーザーID
+                    description: ユーザーキー
                 required:
-                  - userCode
+                  - userKey
         '400':
           description: メールアドレスが存在しないか、数字6桁が一致しない
       description: |-
         仮登録メールに記載されたランダムな数字とメールアドレスを基に
         ユーザー登録を行う。
 
-        戻り値として、ユーザーID　userCode を返す。
+        戻り値として、ユーザーキー （ userKey ) を返す。
+
+        ユーザーキーは自分のIDなので、アプリで保存してください。
+        今後、他のAPIを使う際には、ユーザーキーを必ずヘッダーに加えて下さい
       parameters:
         - schema:
             type: string
           in: query
           name: userEmail
           description: メールアドレス
+          required: true
         - schema:
             type: string
           in: query
           name: tempPass
           description: メール記載の数字6桁
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userFcmID
+          description: FireBaseのFCM ID
+        - schema:
+            type: string
+          in: query
+          name: userDevice
+          description: 広告用の端末ID
       tags:
         - ユーザー登録
+    parameters: []
 components:
   schemas: {}
   securitySchemes:
