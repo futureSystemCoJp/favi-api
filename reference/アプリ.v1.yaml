@@ -1491,7 +1491,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  userKey:
+                  apiKey:
                     type: string
                     description: |
                       ユーザーキー
@@ -1534,11 +1534,13 @@ paths:
                     items:
                       $ref: ''
                 required:
-                  - userKey
+                  - apiKey
                   - exhibit
                   - toDo
                   - inform
                   - notify
+        '403':
+          description: ユーザーは管理者から強制退会措置を受けています
       operationId: get-init
       description: |-
         このAPIはアプリ起動時に必ず一度呼ばれるAPIです。
@@ -1559,7 +1561,7 @@ paths:
         - schema:
             type: string
           in: query
-          name: userDeviceID
+          name: userDevice
           description: |-
             Android : android ID , 
             iOS : 広告ID
