@@ -2363,7 +2363,7 @@ paths:
         既に設定済みの問題箇所の一覧を取得する
         problemPartは、問題箇所一覧のAPIを参照して下さい。
 
-        [問題箇所一覧のAPI](./part/)
+        [問題箇所一覧のAPI](../~1part~1/get)
       parameters: []
     parameters: []
 components:
