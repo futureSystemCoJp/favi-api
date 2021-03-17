@@ -2351,6 +2351,21 @@ paths:
         問題箇所の一覧を取得
 
         partGroupは定義マスタの問題箇所種別を参照して下さい。
+  '/exhibit/problem/{exhibitCode}/':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: get-exhibit-problem
+      description: |-
+        既に設定済みの問題箇所の一覧を取得する
+        problemPartは、問題箇所一覧のAPIを参照して下さい。
+
+        [問題箇所一覧のAPI](./part/)
+      parameters: []
+    parameters: []
 components:
   schemas: {}
   securitySchemes:
