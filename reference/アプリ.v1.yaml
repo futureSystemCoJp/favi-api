@@ -2230,15 +2230,15 @@ paths:
       parameters:
         - schema:
             type: string
-          in: header
-          name: userFaceBook
-          description: FaceBook認証で取得するキー
-          required: true
-        - schema:
-            type: string
           in: query
           name: userEmail
           description: メールアドレス
+        - schema:
+            type: string
+          in: query
+          name: userFaceBook
+          description: FaceBook認証で取得するキー
+          required: true
   /bank/:
     get:
       summary: 金融機関一覧取得
