@@ -2189,6 +2189,57 @@ paths:
           in: query
           name: userEmail
           description: メールアドレス
+  /bank/:
+    get:
+      summary: 銀行一覧取得
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    bankCode:
+                      type: number
+                      description: 金融機関コード
+                    bankName:
+                      type: string
+                      description: 金融機関名
+      operationId: get-bank
+      description: 金融機関一覧を取得する
+  /bank/branch/:
+    get:
+      summary: 支店一覧取得API
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    branchCode:
+                      type: number
+                      description: 支店ID
+                    branchName:
+                      type: string
+                      description: 支店名
+      operationId: get-bank-branch
+      description: 金融機関を指定してその支店一覧を取得します
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: bankCode
+          description: 金融機関コード
+          required: true
 components:
   schemas: {}
   securitySchemes:
