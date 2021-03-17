@@ -243,21 +243,25 @@ paths:
           in: query
           name: userNameLast
           description: "氏名（姓）\t"
+          required: true
         - schema:
             type: string
           in: query
           name: userNameFirst
           description: "氏名（名）\t"
+          required: true
         - schema:
             type: string
           in: query
           name: userKanaLast
           description: "カナ（姓）\t"
+          required: true
         - schema:
             type: string
           in: query
           name: userKanaFirst
           description: "カナ（名）\t"
+          required: true
         - schema:
             type: string
             format: date
@@ -265,26 +269,31 @@ paths:
           in: query
           name: userBirth
           description: "生年月日\t"
+          required: true
         - schema:
             type: string
           in: query
           name: userPostal
-          description: "郵便番号\t"
+          description: 郵便番号
+          required: true
         - schema:
             type: string
           in: query
           name: userAddress
-          description: 住所
+          description: 以降の住所
+          required: true
         - schema:
             type: string
           in: query
           name: userPhone
           description: 電話番号
+          required: true
         - schema:
             type: string
           in: query
           name: userLicense
           description: 免許証番号
+          required: true
         - schema:
             type: string
             format: date
@@ -292,16 +301,19 @@ paths:
           in: query
           name: userExpire
           description: "免許有効期限\t"
+          required: true
         - schema:
             type: string
           in: query
           name: userBankCode
           description: 金融機関コード
+          required: true
         - schema:
             type: string
           in: query
           name: userBankBranch
           description: 支店番号
+          required: true
         - schema:
             type: string
             enum:
@@ -310,22 +322,43 @@ paths:
           in: query
           name: userBankType
           description: "預金種目\t"
+          required: true
         - schema:
             type: string
           in: query
           name: userBankNumber
           description: "口座番号\t"
+          required: true
         - schema:
             type: string
             pattern: カタカナ
           in: query
           name: userBankName
           description: 口座名義
+          required: true
         - schema:
             type: string
           in: query
           name: userBankPost
           description: 記号（郵貯）
+        - schema:
+            type: string
+          in: query
+          name: userPass
+          description: パスワード
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userPref
+          description: 都道府県
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userCity
+          description: 市区町村
+          required: true
       description: |-
         金融機関コードが9900（ゆうちょ銀行）の場合、userBankPostは必須。
         それ以外の場合、userBankTypeは必須。
