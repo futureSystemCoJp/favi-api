@@ -225,6 +225,19 @@ paths:
         入力されたメールアドレスに仮登録のメールを送信する。
         登録済みのメールアドレスでも成功します。
 
+
+        ## メールが送信されます
+        メールアドレスには認証URLが載っています。
+        クリックすると当然、ブラウザが起動します。ブラウザから下記のURLスキームでアプリに戻ります。
+
+
+        jp.fabi://register/verify?{apiKey}
+        jp.fabi://register/verify?ユーザーキー
+
+        jp.fabi:// のカスタムスキームでアプリに戻れる様にして下さい
+
+
+
         ↓ このAPIは、認証は不要です
   /register/account/:
     post:
@@ -2032,6 +2045,9 @@ paths:
         '400':
           description: メールアドレスが存在しないか、数字6桁が一致しない
       description: |-
+        ### こちら使わなくなりました
+
+
         仮登録メールに記載されたランダムな数字とメールアドレスを基に
         ユーザー登録を行う。
 
@@ -2068,6 +2084,7 @@ paths:
           description: 広告用の端末ID
       tags:
         - ユーザー登録
+      deprecated: true
     parameters: []
   /register/google/:
     post:
