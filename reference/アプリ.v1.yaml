@@ -2312,12 +2312,21 @@ paths:
           name: exhibitCode
           description: 出品ID
           required: true
+        - schema:
+            type: string
+          in: query
+          name: deleteUnspecified
+          description: 未指定削除フラグ
       description: |-
         指定した出品IDに対して、装備品を追加します。
         装備品IDは、複数指定できます。
 
         ( example )
         equipmentCode[]=1&equipmentCode[]=2
+
+        ## 未指定削除フラグとは？
+        1を指定すると、指定しなかった装備品IDを削除するようにします。
+        書き換えに使えます。
 components:
   schemas: {}
   securitySchemes:
