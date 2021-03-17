@@ -2026,7 +2026,7 @@ paths:
         - schema:
             type: string
           in: query
-          name: yearType
+          name: yearSection
           description: 類別区分番号
       description: 該当するグレードの一覧を出力する
   /equipment/:
