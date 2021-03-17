@@ -2353,8 +2353,7 @@ paths:
         partGroupは定義マスタの問題箇所種別を参照して下さい。
   '/exhibit/problem/{exhibitCode}/':
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: 問題箇所取得API
       responses:
         '200':
           description: OK
@@ -2365,6 +2364,8 @@ paths:
 
         [問題箇所一覧のAPI](../~1part~1/get)
       parameters: []
+      tags:
+        - 出品
     parameters: []
 components:
   schemas: {}
