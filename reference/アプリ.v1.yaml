@@ -2008,7 +2008,7 @@ paths:
                     equipementName:
                       type: string
                       description: 装備名
-                    equipementType:
+                    equipmentGroup:
                       type: number
                       description: 装備種別
       operationId: get-equipment
