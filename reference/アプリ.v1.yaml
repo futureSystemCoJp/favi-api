@@ -2192,7 +2192,8 @@ paths:
   /bank/:
     get:
       summary: 銀行一覧取得
-      tags: []
+      tags:
+        - ユーザー登録
       responses:
         '200':
           description: OK
@@ -2214,7 +2215,8 @@ paths:
   /bank/branch/:
     get:
       summary: 支店一覧取得API
-      tags: []
+      tags:
+        - ユーザー登録
       responses:
         '200':
           description: OK
