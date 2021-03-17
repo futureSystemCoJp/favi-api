@@ -464,6 +464,13 @@ paths:
           name: userThumbnail
           description: サムネイル画像（バイナリ）
           required: true
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+        description: userThumbnail　でサムネイル画像のバイナリを送信して下さい
   /search/:
     get:
       summary: 検索条件一覧
