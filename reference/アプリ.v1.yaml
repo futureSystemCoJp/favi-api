@@ -2056,6 +2056,7 @@ paths:
                       type: number
                       description: 装備種別
       operationId: get-equipment
+      description: 装備種別は定義マスタを参照して下さい
   /register/verify/:
     post:
       summary: メールアドレス認証API
