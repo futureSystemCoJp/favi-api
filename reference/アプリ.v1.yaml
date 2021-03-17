@@ -371,11 +371,6 @@ paths:
           name: userCity
           description: 市区町村
           required: true
-        - schema:
-            type: string
-          in: query
-          name: userEmail
-          description: メールアドレス
       description: |-
         金融機関コードが9900（ゆうちょ銀行）の場合、userBankPostは必須。
         それ以外の場合、userBankTypeは必須。
@@ -464,13 +459,6 @@ paths:
           name: userThumbnail
           description: サムネイル画像（バイナリ）
           required: true
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties: {}
-        description: userThumbnail　でサムネイル画像のバイナリを送信して下さい
   /search/:
     get:
       summary: 検索条件一覧
@@ -2002,14 +1990,45 @@ paths:
       summary: グレード一覧
       tags:
         - マスタ
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    gradeCode:
+                      type: number
+                      description: グレードID
+                    gradeName:
+                      type: string
+                      description: グレード名
       operationId: get-grade
       parameters:
         - schema:
-            type: string
+            type: number
           in: query
           name: gradeCarType
           description: 車種ID
+        - schema:
+            type: string
+          in: query
+          name: gradeType
+          description: 型式
+        - schema:
+            type: string
+          in: query
+          name: yearNumber
+          description: 型式指定番号
+        - schema:
+            type: string
+          in: query
+          name: yearType
+          description: 類別区分番号
+      description: 該当するグレードの一覧を出力する
   /equipment/:
     get:
       summary: 装備一覧取得
