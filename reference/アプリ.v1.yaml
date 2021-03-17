@@ -2351,12 +2351,28 @@ paths:
         問題箇所の一覧を取得
 
         partGroupは定義マスタの問題箇所種別を参照して下さい。
-  '/exhibit/problem/{exhibitCode}/':
+  '/problem/{exhibitCode}/':
     get:
       summary: 問題箇所取得API
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    problemPart:
+                      type: string
+                      description: 問題箇所ID
+                    problemText:
+                      type: string
+                      description: 問題内容
+                    problemThumbnail:
+                      type: string
+                      description: サムネイル
       operationId: get-exhibit-problem
       description: |-
         既に設定済みの問題箇所の一覧を取得する
@@ -2366,7 +2382,43 @@ paths:
       parameters: []
       tags:
         - 出品
-    parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
+    post:
+      summary: 問題箇所登録API
+      operationId: post-exhibit-problem-exhibitCode
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: problemPart
+          description: 問題箇所ID
+      description: |-
+        問題箇所を保存する。
+        その問題箇所が既に設定済みであれば、上書きします。
+      tags:
+        - 出品
+    delete:
+      summary: 問題箇所削除API
+      operationId: delete-problem-exhibitCode
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: problemPart
+          description: 問題箇所ID
+      tags:
+        - 出品
 components:
   schemas: {}
   securitySchemes:
