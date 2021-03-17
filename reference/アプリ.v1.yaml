@@ -1684,7 +1684,7 @@ paths:
                     - tagType
       operationId: get-tag
       description: タグ一覧を取得する
-  /carType/:
+  /car-type/:
     get:
       summary: 車種一覧
       tags:
@@ -1728,6 +1728,7 @@ paths:
           in: query
           name: makerCode
           description: メーカーID
+    parameters: []
   /maker/:
     get:
       summary: メーカー一覧
@@ -1915,7 +1916,7 @@ paths:
           in: query
           name: reviewMessage
           description: 評価本文
-  /carType/market/:
+  /car-type/market/:
     get:
       summary: 相場取得
       tags:
@@ -1971,6 +1972,7 @@ paths:
         '200':
           description: OK
       description: レスポンスフォーマット未定
+    parameters: []
   /grade/:
     get:
       summary: グレード一覧
