@@ -887,28 +887,20 @@ paths:
       responses:
         '200':
           description: OK
-      parameters:
-        - schema:
-            type: number
-          in: query
-          name: exhibitCarType
-          description: 車種ID
-          required: true
-        - schema:
-            type: number
-          in: query
-          name: exhibitNumber
-          description: "型式指定番号\t"
-          required: true
-        - schema:
-            type: number
-          in: query
-          name: exhibitSection
-          description: "類別区分番号\t"
-          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exhibitCode:
+                    type: number
+                    description: 出品ID
+                required:
+                  - exhibitCode
+      parameters: []
       description: |-
-        取引内容を登録。車両情報を読み込んだ時点で自動的に送信する。
-        下書き状態として登録する
+        取引内容を登録。下書き状態として登録します。
+        出品IDを返却するので、以後下書きの保存や公開などは、出品情報更新APIを叩いて下さい。
       tags:
         - 出品情報
   '/exhibit/{exhibitCode}/':
@@ -1169,7 +1161,7 @@ paths:
           description: OK
       tags:
         - 出品情報
-      description: |-
+      description: |
         入力された値を出品情報に対して更新する。
         設定されたパラメータのみ更新されるので、各画面から入力された物を保存する。
       parameters:
