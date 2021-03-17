@@ -2322,6 +2322,35 @@ paths:
         1を指定すると、指定しなかった装備品IDを削除するようにします。
         書き換えに使えます。
     parameters: []
+  /part/:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - マスタ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    partCode:
+                      type: string
+                      description: 問題箇所ID
+                    partName:
+                      type: string
+                      description: 問題箇所名
+                    partGroup:
+                      type: number
+                      description: 問題箇所種別
+      operationId: get-part
+      description: |-
+        問題箇所の一覧を取得
+
+        partGroupは定義マスタの問題箇所種別を参照して下さい。
 components:
   schemas: {}
   securitySchemes:
