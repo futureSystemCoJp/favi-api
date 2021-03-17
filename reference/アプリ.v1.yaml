@@ -2292,7 +2292,7 @@ paths:
           required: true
       tags:
         - マスタ
-  /exhibit/equipment/:
+  '/exhibit/equipment/{exhibitCode}/':
     post:
       summary: 出品 - 装備品登録
       operationId: post-exhibit-equipment
@@ -2305,12 +2305,6 @@ paths:
           in: query
           name: 'equipmentCode[]'
           description: 装備品ID（配列）
-          required: true
-        - schema:
-            type: number
-          in: query
-          name: exhibitCode
-          description: 出品ID
           required: true
         - schema:
             type: string
@@ -2327,6 +2321,7 @@ paths:
         ## 未指定削除フラグとは？
         1を指定すると、指定しなかった装備品IDを削除するようにします。
         書き換えに使えます。
+    parameters: []
 components:
   schemas: {}
   securitySchemes:
