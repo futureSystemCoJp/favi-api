@@ -231,11 +231,10 @@ paths:
         クリックすると当然、ブラウザが起動します。ブラウザから下記のURLスキームでアプリに戻ります。
 
 
-        jp.fabi://register/verify?{apiKey}
-        jp.fabi://register/verify?ユーザーキー
+        - jp.fabi://register/verify?{apiKey}
+        - jp.fabi://register/verify?ユーザーキー
 
         jp.fabi:// のカスタムスキームでアプリに戻れる様にして下さい
-
 
 
         ↓ このAPIは、認証は不要です
