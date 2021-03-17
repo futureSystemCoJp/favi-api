@@ -1311,17 +1311,27 @@ paths:
             type: string
           in: query
           name: exhibitPlaceCity
-          description: "市区町村\t"
+          description: 市区町村
         - schema:
             type: string
           in: query
           name: exhibitPlaceText
-          description: "引渡し場所\t"
+          description: 引渡し場所
         - schema:
             type: number
           in: query
           name: exhibitNegotiate
-          description: "交渉可否フラグ\t"
+          description: 交渉可否フラグ
+        - schema:
+            type: string
+          in: query
+          name: exhibitSection
+          description: 類別区分番号
+        - schema:
+            type: string
+          in: query
+          name: exhibitNumber
+          description: 型式指定番号
   /exhibit/price/:
     get:
       summary: 価格分布取得
