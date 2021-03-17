@@ -2191,7 +2191,7 @@ paths:
           description: メールアドレス
   /bank/:
     get:
-      summary: 銀行一覧取得
+      summary: 金融機関一覧取得
       tags:
         - ユーザー登録
       responses:
