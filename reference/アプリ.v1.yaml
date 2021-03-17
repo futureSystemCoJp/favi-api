@@ -329,6 +329,27 @@ paths:
       description: |-
         金融機関コードが9900（ゆうちょ銀行）の場合、userBankPostは必須。
         それ以外の場合、userBankTypeは必須。
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+          application/json:
+            schema:
+              type: object
+              properties: {}
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+        description: |
+          免許証画像の File Binary 
+          - 表面の名前は、 userLicence0
+          - 裏面の名前は、 userLicence1
+
+          multipart/form-data で送信して下さい。
+          HTMLのForm部品と同じです
     parameters: []
   /register/profile/:
     post:
