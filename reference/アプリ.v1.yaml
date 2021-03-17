@@ -2192,8 +2192,6 @@ paths:
   /bank/:
     get:
       summary: 金融機関一覧取得
-      tags:
-        - ユーザー登録
       responses:
         '200':
           description: OK
@@ -2212,11 +2210,11 @@ paths:
                       description: 金融機関名
       operationId: get-bank
       description: 金融機関一覧を取得する
+      tags:
+        - マスタ
   /bank/branch/:
     get:
       summary: 支店一覧取得API
-      tags:
-        - ユーザー登録
       responses:
         '200':
           description: OK
@@ -2242,6 +2240,8 @@ paths:
           name: bankCode
           description: 金融機関コード
           required: true
+      tags:
+        - マスタ
 components:
   schemas: {}
   securitySchemes:
