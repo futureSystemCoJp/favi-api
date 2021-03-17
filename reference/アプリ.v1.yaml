@@ -2056,7 +2056,6 @@ paths:
                       type: number
                       description: 装備種別
       operationId: get-equipment
-      description: 装備種別は定義マスタを参照して下さい
   /register/verify/:
     post:
       summary: メールアドレス認証API
@@ -2293,6 +2292,32 @@ paths:
           required: true
       tags:
         - マスタ
+  /exhibit/equipment/:
+    post:
+      summary: 出品 - 装備品登録
+      operationId: post-exhibit-equipment
+      responses:
+        '200':
+          description: OK
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: 'equipmentCode[]'
+          description: 装備品ID（配列）
+          required: true
+        - schema:
+            type: number
+          in: query
+          name: exhibitCode
+          description: 出品ID
+          required: true
+      description: |-
+        指定した出品IDに対して、装備品を追加します。
+        装備品IDは、複数指定できます。
+
+        ( example )
+        equipmentCode[]=1&equipmentCode[]=2
 components:
   schemas: {}
   securitySchemes:
