@@ -2422,6 +2422,35 @@ paths:
           description: 問題箇所ID
       tags:
         - 出品
+  /angle/:
+    get:
+      summary: 画角一覧
+      tags:
+        - マスタ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    angleCode:
+                      type: number
+                      description: 画角ID
+                    angleName:
+                      type: string
+                      description: 画角名
+                    angleFile:
+                      type: string
+                      description: ファイル名
+      operationId: get-angle
+      description: |-
+        呼び出される画面： 出品 – 49　など
+
+        出品時の写真を取る際の画角（アングル）指定のマスタです。
 components:
   schemas: {}
   securitySchemes:
