@@ -2321,12 +2321,10 @@ paths:
         ## 未指定削除フラグとは？
         1を指定すると、指定しなかった装備品IDを削除するようにします。
         書き換えに使えます。
-      tags:
-        - 出品
     parameters: []
   /part/:
     get:
-      summary: 問題箇所一覧
+      summary: Your GET endpoint
       tags:
         - マスタ
       responses:
@@ -2353,7 +2351,6 @@ paths:
         問題箇所の一覧を取得
 
         partGroupは定義マスタの問題箇所種別を参照して下さい。
-        [定義マスタ](/docs/定義マスタ.md#問題箇所種別)
   '/problem/{exhibitCode}/':
     get:
       summary: 問題箇所取得API
@@ -2422,39 +2419,33 @@ paths:
           description: 問題箇所ID
       tags:
         - 出品
-  /angle/:
+  /user/me/:
     get:
-      summary: 画角一覧
+      summary: 自分の情報取得API
       tags:
-        - マスタ
+        - ユーザー登録
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    angleCode:
-                      type: number
-                      description: 画角ID
-                    angleName:
-                      type: string
-                      description: 画角名
-                    angleFile:
-                      type: string
-                      description: ファイル名
-      operationId: get-angle
-      description: |-
-        呼び出される画面： 出品 – 49　など
-
-        出品時の写真を取る際の画角（アングル）指定のマスタです。
-
-        angleFile　のフィールドはグリッド線のファイル名と一致します。
-
-        例） body_front →　body_front.png
+                type: object
+                properties:
+                  userCode:
+                    type: number
+                    description: ユーザーID
+                  userName:
+                    type: string
+                    description: ユーザー名
+                  userEmail:
+                    type: string
+                    description: メールアドレス
+                  userStatus:
+                    type: number
+                    description: '0:仮登録,1:本登録'
+      operationId: get-user-me
+      description: 自分がログインしているユーザー情報を取得する
 components:
   schemas: {}
   securitySchemes:
