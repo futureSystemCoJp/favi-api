@@ -2324,7 +2324,7 @@ paths:
     parameters: []
   /part/:
     get:
-      summary: Your GET endpoint
+      summary: 問題箇所一覧
       tags:
         - マスタ
       responses:
