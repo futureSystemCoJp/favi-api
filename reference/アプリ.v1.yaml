@@ -2351,6 +2351,7 @@ paths:
         問題箇所の一覧を取得
 
         partGroupは定義マスタの問題箇所種別を参照して下さい。
+        [定義マスタ](./定義マスタ.md)
   '/problem/{exhibitCode}/':
     get:
       summary: 問題箇所取得API
