@@ -2451,6 +2451,10 @@ paths:
         呼び出される画面： 出品 – 49　など
 
         出品時の写真を取る際の画角（アングル）指定のマスタです。
+
+        angleFile　のフィールドはグリッド線のファイル名と一致します。
+
+        例） body_front →　body_front.png
 components:
   schemas: {}
   securitySchemes:
