@@ -2404,7 +2404,7 @@ paths:
         問題箇所を保存する。
         その問題箇所が既に設定済みであれば、上書きします。
       tags:
-        - 出品
+        - 出品情報
     delete:
       summary: 問題箇所削除API
       operationId: delete-problem-exhibitCode
@@ -2418,7 +2418,7 @@ paths:
           name: problemPart
           description: 問題箇所ID
       tags:
-        - 出品
+        - 出品情報
   /user/me/:
     get:
       summary: 自分の情報取得API
