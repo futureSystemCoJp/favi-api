@@ -2381,7 +2381,7 @@ paths:
         [問題箇所一覧のAPI](../~1part~1/get)
       parameters: []
       tags:
-        - 出品
+        - 出品情報
     parameters:
       - schema:
           type: string
