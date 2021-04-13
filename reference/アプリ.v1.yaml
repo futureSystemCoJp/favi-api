@@ -2402,6 +2402,17 @@ paths:
           in: query
           name: problemPart
           description: 問題箇所ID
+          required: true
+        - schema:
+            type: string
+          in: query
+          description: サムネイル画像（バイナリ）
+          name: problemThumbnail
+        - schema:
+            type: string
+          in: query
+          name: problemText
+          description: 問題内容テキスト
       description: |-
         問題箇所を保存する。
         その問題箇所が既に設定済みであれば、上書きします。
