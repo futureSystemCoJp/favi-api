@@ -2496,6 +2496,91 @@ paths:
 
 
         angleFile -> Google Driveのファイル名に合致します。
+  '/photo/{exhibitCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
+    get:
+      summary: 出品写真取得API
+      tags:
+        - 出品情報
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    photoExhibit:
+                      type: string
+                      description: 出品ID
+                    photoAngle:
+                      type: string
+                      description: アングルID
+                    photoComment:
+                      type: string
+                      description: テキスト
+                    photoThumbnail:
+                      type: string
+                      description: サムネイル
+                  required:
+                    - photoExhibit
+                    - photoAngle
+      operationId: get-photo-exhibitCode
+      description: |-
+        出品時の車両画像を取得する。
+        photoAngleは、アングル一覧APIを参照して下さい。
+
+        [アングル一覧のAPI](../~1angle~1/get)
+    post:
+      summary: 出品写真登録API
+      operationId: post-photo-exhibitCode
+      responses:
+        '200':
+          description: OK
+      description: |
+        出品写真を保存する。 そのアングルの写真が既に設定済みであれば、上書きします。
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: photoAngle
+          description: アングルID
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: photoComment
+          description: テキスト
+        - schema:
+            type: string
+          in: query
+          name: photoThumbnail
+          description: サムネイル画像（バイナリ）
+      tags:
+        - 出品情報
+    delete:
+      summary: 出品写真削除API
+      operationId: delete-photo-exhibitCode
+      responses:
+        '200':
+          description: OK
+      tags:
+        - 出品情報
+      description: 出品した写真を削除します
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: photoAngle
+          description: アングルID
+          required: true
 components:
   schemas: {}
   securitySchemes:
