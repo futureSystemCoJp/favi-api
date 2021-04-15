@@ -2353,6 +2353,8 @@ paths:
         問題箇所の一覧を取得
 
         partGroupは定義マスタの問題箇所種別を参照して下さい。
+
+        https://future-system-co-jp.stoplight.io/docs/favi-api/docs/%E5%AE%9A%E7%BE%A9%E3%83%9E%E3%82%B9%E3%82%BF.md#%E5%95%8F%E9%A1%8C%E7%AE%87%E6%89%80%E7%A8%AE%E5%88%A5
   '/problem/{exhibitCode}/':
     get:
       summary: 問題箇所取得API
