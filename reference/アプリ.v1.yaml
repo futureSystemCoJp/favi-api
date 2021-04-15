@@ -2459,6 +2459,43 @@ paths:
                     description: '0:仮登録,1:本登録'
       operationId: get-user-me
       description: 自分がログインしているユーザー情報を取得する
+  /angle/:
+    get:
+      summary: アングル一覧
+      tags:
+        - マスタ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    angleCode:
+                      type: string
+                      description: アングルID
+                    angleName:
+                      type: string
+                      description: アングル名
+                    angleFile:
+                      type: string
+                      description: ファイル名
+                  required:
+                    - angleCode
+                    - angleName
+                    - angleFile
+      operationId: get-angle
+      description: |-
+        写真アングルの定義です。
+
+        下記のフォルダに画像ファイルが入っています。
+        https://drive.google.com/drive/folders/1H6NjuJu-oDvGYbXcfBIgIjg2QwpFjdWz?usp=sharing
+
+
+        angleFile -> Google Driveのファイル名に合致します。
 components:
   schemas: {}
   securitySchemes:
