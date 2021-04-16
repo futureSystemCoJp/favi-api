@@ -2485,10 +2485,14 @@ paths:
                     angleFile:
                       type: string
                       description: ファイル名
+                    angleGroup:
+                      type: number
+                      description: アングル種別
                   required:
                     - angleCode
                     - angleName
                     - angleFile
+                    - angleGroup
       operationId: get-angle
       description: |-
         写真アングルの定義です。
