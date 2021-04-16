@@ -2494,7 +2494,7 @@ paths:
                     - angleFile
                     - angleGroup
       operationId: get-angle
-      description: |-
+      description: |+
         写真アングルの定義です。
 
         下記のフォルダに画像ファイルが入っています。
@@ -2502,6 +2502,11 @@ paths:
 
 
         angleFile -> Google Driveのファイル名に合致します。
+
+
+        angleGroup
+        https://future-system-co-jp.stoplight.io/docs/favi-api/docs/%E5%AE%9A%E7%BE%A9%E3%83%9E%E3%82%B9%E3%82%BF.md
+
   '/photo/{exhibitCode}/':
     parameters:
       - schema:
