@@ -1850,8 +1850,6 @@ paths:
                     type: string
                     description: ユーザーキー
       operationId: get-user-logout
-      tags:
-        - ユーザー関連
   /transact/:
     get:
       summary: 取引一覧
@@ -2610,8 +2608,6 @@ paths:
                   - apiKey
         '401':
           description: ログイン失敗
-      tags:
-        - ユーザー登録
       parameters:
         - schema:
             type: string
@@ -2625,6 +2621,8 @@ paths:
           name: userPass
           description: パスワード
           required: true
+      tags:
+        - ユーザー関連
 components:
   schemas: {}
   securitySchemes:
