@@ -2494,7 +2494,7 @@ paths:
                     - angleFile
                     - angleGroup
       operationId: get-angle
-      description: |+
+      description: |
         写真アングルの定義です。
 
         下記のフォルダに画像ファイルが入っています。
@@ -2506,7 +2506,6 @@ paths:
 
         angleGroup
         https://future-system-co-jp.stoplight.io/docs/favi-api/docs/%E5%AE%9A%E7%BE%A9%E3%83%9E%E3%82%B9%E3%82%BF.md
-
   '/photo/{exhibitCode}/':
     parameters:
       - schema:
@@ -2591,6 +2590,40 @@ paths:
           in: query
           name: photoAngle
           description: アングルID
+          required: true
+  /user/login/:
+    post:
+      summary: ログイン実行
+      operationId: post-user-login
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  apiKey:
+                    type: string
+                    description: ユーザーキー
+                required:
+                  - apiKey
+        '401':
+          description: ログイン失敗
+      tags:
+        - ユーザー登録
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: userEmail
+          description: メールアドレス
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: userPass
+          description: パスワード
           required: true
 components:
   schemas: {}
