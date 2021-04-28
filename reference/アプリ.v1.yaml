@@ -2678,6 +2678,9 @@ paths:
                   exhibitHandle:
                     type: string
                     description: 定義マスタ ハンドル種別
+                  exhibitMission:
+                    type: string
+                    description: 定義マスタ ミッション種別
         '404':
           description: 車両が見つからない
           content:
@@ -2688,6 +2691,7 @@ paths:
       operationId: get-exhibit-qrk
       description: |-
         軽自動車のQRコード３つを読み込んで、車体情報を返却するAPI
+        https://cacoo.com/diagrams/U9Dx501vK8E4ovgx/1D16C
 
         404の場合は、車両が見つかりません
         200の場合は、車両が見つかりました。
