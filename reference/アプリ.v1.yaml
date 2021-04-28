@@ -2623,6 +2623,95 @@ paths:
           required: true
       tags:
         - ユーザー関連
+  /exhibit/qrk/:
+    get:
+      summary: 軽自動車QRコードAPI
+      tags:
+        - 出品
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  gradeCode:
+                    type: string
+                    description: グレードID
+                  gradeName:
+                    type: string
+                    description: グレード名
+                  gradeDrive:
+                    type: string
+                    description: 定義マスタ -> 駆動種別
+                  carTypeCode:
+                    type: string
+                    description: 車種ID
+                  carTypeName:
+                    type: string
+                    description: 車種名
+                  exhibitRegisterYear:
+                    type: string
+                    description: 初年度登録（年)
+                  exhibitRegisterMonth:
+                    type: string
+                    description: 初年度登録（月)
+                  exhibitPaperExpire:
+                    type: string
+                    description: 車検有効期限(yyyy-MM-dd)
+                  exhibitNumberPlace:
+                    type: string
+                    description: ナンバー試験場
+                  exhibitNumberGroup:
+                    type: string
+                    description: ナンバー上3桁
+                  exhibitNumberKana:
+                    type: string
+                    description: ナンバーかな
+                  exhibitNumberCode:
+                    type: string
+                    description: ナンバー下4桁
+                  exhibitCarNumber:
+                    type: string
+                    description: 車体番号
+                  exhibitHandle:
+                    type: string
+                    description: 定義マスタ ハンドル種別
+        '404':
+          description: 車両が見つからない
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      operationId: get-exhibit-qrk
+      description: |-
+        軽自動車のQRコード３つを読み込んで、車体情報を返却するAPI
+
+        404の場合は、車両が見つかりません
+        200の場合は、車両が見つかりました。
+
+        200でプロパティがNULLの場合、データがありませんので、選択させてください。
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: qrCode0
+          description: 右から３つ目のQRコード
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: qrCode1
+          description: 右から２つ目のQRコード
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: qrCode2
+          description: 右から１つ目のQRコード
+          required: true
 components:
   schemas: {}
   securitySchemes:
