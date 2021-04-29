@@ -2776,7 +2776,7 @@ paths:
       operationId: get-exhibit-qr
       description: |-
         普通自動車のQRコード4つを読み込んで、車体情報を返却するAPI
-        https://cacoo.com/diagrams/U9Dx501vK8E4ovgx/1D16C
+        https://cacoo.com/diagrams/U9Dx501vK8E4ovgx/3BEA0
 
         404の場合は、車両が見つかりません
         200の場合は、車両が見つかりました。
