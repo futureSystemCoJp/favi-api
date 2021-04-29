@@ -2716,6 +2716,97 @@ paths:
           name: qrCode2
           description: 右から１つ目のQRコード
           required: true
+  /exhibit/qr/:
+    get:
+      summary: 普通自動車車検証API
+      tags:
+        - 出品情報
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  gradeCode:
+                    type: string
+                    description: グレードID
+                  gradeName:
+                    type: string
+                    description: グレード名
+                  gradeDrive:
+                    type: string
+                    description: 定義マスタ -> 駆動種別
+                  carTypeCode:
+                    type: string
+                    description: 車種ID
+                  carTypeName:
+                    type: string
+                    description: 車種名
+                  exhibitRegisterYear:
+                    type: string
+                    description: 初年度登録（年)
+                  exhibitRegisterMonth:
+                    type: string
+                    description: 初年度登録（月)
+                  exhibitPaperExpire:
+                    type: string
+                    description: 車検有効期限(yyyy-MM-dd)
+                  exhibitNumberPlace:
+                    type: string
+                    description: ナンバー試験場
+                  exhibitNumberGroup:
+                    type: string
+                    description: ナンバー上3桁
+                  exhibitNumberKana:
+                    type: string
+                    description: ナンバーかな
+                  exhibitCarNumber:
+                    type: string
+                    description: ナンバー下4桁
+                  exhibitHandle:
+                    type: string
+                    description: 定義マスタ ハンドル種別
+                  exhibitMission:
+                    type: string
+                    description: 定義マスタ ミッション種別
+        '404':
+          description: 車両が見つからない
+      operationId: get-exhibit-qr
+      description: |-
+        普通自動車のQRコード4つを読み込んで、車体情報を返却するAPI
+        https://cacoo.com/diagrams/U9Dx501vK8E4ovgx/1D16C
+
+        404の場合は、車両が見つかりません
+        200の場合は、車両が見つかりました。
+
+        200でプロパティがNULLの場合、データがありませんので、選択させてください。
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: qrCode0
+          description: 左から2つ目のQRコード
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: qrCode1
+          description: 左から3つ目のQRコード
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: qrCode2
+          description: 左から4つ目のQRコード
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: qrCode3
+          description: 左から5つ目のQRコード
+          required: true
 components:
   schemas: {}
   securitySchemes:
