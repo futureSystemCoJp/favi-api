@@ -2626,8 +2626,6 @@ paths:
   /exhibit/qrk/:
     get:
       summary: 軽自動車QRコードAPI
-      tags:
-        - 出品
       responses:
         '200':
           description: OK
@@ -2716,6 +2714,8 @@ paths:
           name: qrCode2
           description: 右から１つ目のQRコード
           required: true
+      tags:
+        - 出品情報
   /exhibit/qr/:
     get:
       summary: 普通車QRコードAPI
