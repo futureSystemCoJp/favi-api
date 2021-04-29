@@ -2718,7 +2718,7 @@ paths:
           required: true
   /exhibit/qr/:
     get:
-      summary: 普通自動車QRAPI
+      summary: 普通車QRコードAPI
       tags:
         - 出品情報
       responses:
