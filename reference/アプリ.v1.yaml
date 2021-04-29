@@ -2807,6 +2807,11 @@ paths:
           name: qrCode3
           description: 左から5つ目のQRコード
           required: true
+        - schema:
+            type: string
+          in: query
+          name: qrCode4
+          description: 左から6つ目のQRコード
 components:
   schemas: {}
   securitySchemes:
