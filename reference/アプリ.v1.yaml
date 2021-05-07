@@ -2954,6 +2954,30 @@ paths:
           description: 車種ID
       description: |
         車種に紐つくモデルを一覧で返す
+  /country/:
+    get:
+      summary: 国一覧
+      tags:
+        - マスタ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    countryCode:
+                      type:
+                        - string
+                        - number
+                      description: 国ID
+                    countryName:
+                      type: string
+                      description: 国名
+      operationId: get-country
 components:
   schemas: {}
   securitySchemes:
