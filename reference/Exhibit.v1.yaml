@@ -31,6 +31,11 @@ properties:
   exhibitRegisterMonth:
     type: number
     description: 初年度登録(月)
+  photoThumbnail:
+    type: array
+    description: 出品写真のサムネイルID（配列)
+    items:
+      type: string
 required:
   - exhibitCode
   - exhibitPrice
