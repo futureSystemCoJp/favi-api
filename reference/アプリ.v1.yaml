@@ -2924,6 +2924,36 @@ paths:
           in: query
           name: qrCode4
           description: 左から6つ目のQRコード
+  /model/:
+    get:
+      summary: モデル一覧
+      tags:
+        - マスタ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    modelName:
+                      type: string
+                      description: モデル名
+                    modelCode:
+                      type: number
+                      description: モデルID
+      operationId: get-model
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: carTypeCode
+          description: 車種ID
+      description: |
+        車種に紐つくモデルを一覧で返す
 components:
   schemas: {}
   securitySchemes:
