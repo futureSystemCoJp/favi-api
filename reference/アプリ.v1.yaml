@@ -824,8 +824,8 @@ paths:
         - schema:
             type: number
           in: query
-          name: gradeCode
-          description: グレードID
+          name: modelCode
+          description: モデルID
         - schema:
             type: number
           in: query
@@ -869,8 +869,8 @@ paths:
         - schema:
             type: number
           in: query
-          name: prefCode
-          description: 都道府県種別
+          name: 'prefCode[]'
+          description: 都道府県種別(配列)
         - schema:
             type: number
           in: query
@@ -881,6 +881,108 @@ paths:
           in: query
           name: expireMax
           description: 車検残上限
+        - schema:
+            type: number
+          in: query
+          name: 'exhibitBodyColor[]'
+          description: ボディカラー種別(配列)
+        - schema:
+            type: number
+          in: query
+          name: exhibitRepair
+          description: 修復歴フラグ
+        - schema:
+            type: string
+          in: query
+          name: 'carTypeBody[]'
+          description: ボディタイプ種別(配列)
+        - schema:
+            type: number
+          in: query
+          name: carTypeExhaustMin
+          description: 排気量下限
+        - schema:
+            type: number
+          in: query
+          name: carTypeExhaustMax
+          description: 排気量上限
+        - schema:
+            type: number
+          in: query
+          name: carTypeFuelMin
+          description: 燃費下限
+        - schema:
+            type: number
+          in: query
+          name: carTypeFuelMax
+          description: 燃費上限
+        - schema:
+            type: number
+          in: query
+          name: exhibitOutPointMin
+          description: 外装点数下限
+        - schema:
+            type: number
+          in: query
+          name: exhibitOutPointMax
+          description: 外装点数上限
+        - schema:
+            type: number
+          in: query
+          name: exhibitInPointMin
+          description: 内装点数下限
+        - schema:
+            type: number
+          in: query
+          name: exhibitInPointMax
+          description: 内装点数下限
+        - schema:
+            type: number
+          in: query
+          name: exhibitMission
+          description: ミッション種別
+        - schema:
+            type: number
+          in: query
+          name: exhibitGear
+          description: 駆動種別
+        - schema:
+            type: number
+          in: query
+          name: exhibitSmoking
+          description: 喫煙フラグ
+        - schema:
+            type: number
+          in: query
+          name: exhibitPet
+          description: ペットフラグ
+        - schema:
+            type: number
+          in: query
+          name: problemMin
+          description: 問題点の数下限
+        - schema:
+            type: number
+          in: query
+          name: problemMax
+          description: 問題点の数上限
+        - schema:
+            type: string
+          in: query
+          name: photoMin
+          description: 写真の数下限
+        - schema:
+            type: string
+          in: query
+          name: photoMax
+          description: 写真の数上限
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: ''
     post:
       summary: 出品情報登録
       operationId: post-exhibit
