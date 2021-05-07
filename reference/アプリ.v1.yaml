@@ -809,7 +809,12 @@ paths:
                     items:
                       $ref: ./Exhibit.v1.yaml
       operationId: get-exhibit
-      description: ''
+      description: |-
+        ~フラグ の場合、true :1 , false : 0 で文字を指定して下さい。
+
+        配列の場合、
+        exhibitBodyColor[]=0&exhibitBodyColor[]=1 ...
+        として複数を指定できます
       parameters:
         - schema:
             type: number
@@ -976,6 +981,11 @@ paths:
           in: query
           name: photoMax
           description: 写真の数上限
+        - schema:
+            type: number
+          in: query
+          name: 'equipementCode[]'
+          description: 装備のID(配列)
       requestBody:
         content:
           application/json:
