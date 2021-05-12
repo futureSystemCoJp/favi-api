@@ -1063,10 +1063,9 @@ paths:
                     type: number
                     description: "初年度登録(月)\t"
                   exhibitPaperExpire:
-                    type:
-                      - string
-                      - 'null'
+                    type: string
                     description: 車検有効期限（切れた場合null）
+                    nullable: true
                   exhibitByeYear:
                     type: number
                     description: "購入年\t"
@@ -1104,15 +1103,13 @@ paths:
                     type: number
                     description: "内装評価点数\t"
                   exhibitCopy:
-                    type:
-                      - string
-                      - 'null'
+                    type: string
                     description: "オススメポイント\t"
+                    nullable: true
                   exhibitDetail:
-                    type:
-                      - string
-                      - 'null'
+                    type: string
                     description: "詳細説明\t"
+                    nullable: true
                   exhibitSendBy:
                     type: number
                     description: "引き渡し種別\t"
@@ -1148,6 +1145,8 @@ paths:
                         equipmentGroup:
                           type: number
                           description: 装備種別
+                        '':
+                          type: string
                       required:
                         - equipmentCode
                         - equipmentName
@@ -1200,25 +1199,23 @@ paths:
                         type: string
                         description: ニックネーム
                       reviewPolite:
-                        type:
-                          - number
-                          - 'null'
+                        type: number
                         description: 誠実さ（5点満点）
+                        nullable: true
                       reviewQuick:
-                        type:
-                          - number
-                          - 'null'
+                        type: number
                         description: 早さ（5点満点）
+                        nullable: true
                       userProfile:
                         type: string
                         description: 自己紹介文
                   comment:
                     type: object
+                    description: この取引のコメント
                     required:
                       - count
                       - offset
                       - data
-                    description: この取引のコメント
                     properties:
                       count:
                         type: number
