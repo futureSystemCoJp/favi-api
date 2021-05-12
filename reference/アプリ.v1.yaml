@@ -1854,6 +1854,11 @@ paths:
           in: query
           name: makerCode
           description: メーカーID
+        - schema:
+            type: string
+          in: query
+          name: gradeType
+          description: 型式
     parameters: []
   /maker/:
     get:
