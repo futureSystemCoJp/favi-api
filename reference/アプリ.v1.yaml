@@ -2980,6 +2980,54 @@ paths:
                       type: string
                       description: 国名
       operationId: get-country
+  '/exhibit/market/{exhibitCode}/':
+    parameters:
+      - schema:
+          type: string
+        name: exhibitCode
+        in: path
+        required: true
+    get:
+      summary: AI価格API
+      tags:
+        - 出品情報
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exhibitPurchase:
+                    type: number
+                    description: 買取価格
+                  exhibitMarket:
+                    type: number
+                    description: 市場価格
+                  exhibitPrice:
+                    type: number
+                    description: 販売価格
+                  exhibitTax:
+                    type: number
+                    description: 自動車税
+                  exhibitSystem:
+                    type: number
+                    description: システム利用料
+                  exhibitRecycle:
+                    type: number
+                    description: リサイクル料
+                  exhibitProfit:
+                    type: number
+                    description: 利益
+      operationId: get-exhibit-market-exhibitCode
+      description: 車両価格を返す
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: exhibitRecycle
+          description: リサイクル料
 components:
   schemas: {}
   securitySchemes:
