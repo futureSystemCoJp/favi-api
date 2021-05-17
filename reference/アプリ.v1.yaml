@@ -2455,6 +2455,9 @@ paths:
                     equipmentName:
                       type: string
                       description: 装備名
+                    equipmentGroup:
+                      type: number
+                      description: 装備種別
       tags:
         - 出品情報
   /part/:
