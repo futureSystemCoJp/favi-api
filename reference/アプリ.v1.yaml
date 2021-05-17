@@ -2436,6 +2436,27 @@ paths:
       tags:
         - 出品情報
     parameters: []
+    get:
+      summary: 装備品取得
+      operationId: get-exhibit-equipment-exhibitCode
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    equipmentCode:
+                      type: number
+                      description: 装備ID
+                    equipmentName:
+                      type: string
+                      description: 装備名
+      tags:
+        - 出品情報
   /part/:
     get:
       summary: 出品箇所定義一覧
