@@ -2505,7 +2505,7 @@ paths:
                   type: object
                   properties:
                     problemPart:
-                      type: string
+                      type: number
                       description: 問題箇所ID
                     problemText:
                       type: string
@@ -2664,10 +2664,10 @@ paths:
                   type: object
                   properties:
                     photoExhibit:
-                      type: string
+                      type: number
                       description: 出品ID
                     photoAngle:
-                      type: string
+                      type: number
                       description: アングルID
                     photoComment:
                       type: string
