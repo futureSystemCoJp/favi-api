@@ -2406,7 +2406,7 @@ paths:
         - マスタ
   '/exhibit/equipment/{exhibitCode}/':
     post:
-      summary: 出品 - 装備品登録
+      summary: 装備品登録
       operationId: post-exhibit-equipment
       responses:
         '200':
