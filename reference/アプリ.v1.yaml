@@ -3044,6 +3044,12 @@ paths:
                   exhibitProfit:
                     type: number
                     description: 利益
+                  exhibitMinimum:
+                    type: number
+                    description: 最小値
+                  exhibitMaximum:
+                    type: number
+                    description: 最大値
       operationId: get-exhibit-market-exhibitCode
       description: 車両価格を返す
       parameters:
