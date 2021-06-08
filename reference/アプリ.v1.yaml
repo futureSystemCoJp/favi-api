@@ -1442,13 +1442,14 @@ paths:
           name: exhibitNumber
           description: 型式指定番号
     delete:
-      summary: ''
+      summary: 取引削除
       operationId: delete-exhibit-exhibitCode
       responses:
         '200':
           description: OK
       tags:
         - 出品情報
+      description: ''
   /exhibit/price/:
     get:
       summary: 価格分布取得
