@@ -1225,6 +1225,12 @@ paths:
                         type: array
                         items:
                           $ref: ./Comment.v1.yaml
+                  gradeType:
+                    type: string
+                    description: 型式
+                  exhibitGrade:
+                    type: string
+                    description: グレードID
                 required:
                   - exhibitCode
                   - exhibitPrice
