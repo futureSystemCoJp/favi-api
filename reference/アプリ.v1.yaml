@@ -68,7 +68,7 @@ paths:
       tags:
         - いいね
       description: いいねを取り消す
-  /toDo/:
+  /to-do/:
     get:
       summary: やる事リスト一覧
       responses:
@@ -84,6 +84,7 @@ paths:
       tags:
         - やる事
       description: 全て一覧で表示
+    parameters: []
   '/user/{userCode}/':
     parameters:
       - schema:
