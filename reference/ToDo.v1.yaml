@@ -12,5 +12,12 @@ properties:
   toDoType:
     type: number
     description: "やること種別\t"
+  toDoExhibit:
+    type: number
+    description: 出品ID
+  toDoTransact:
+    type: number
+    description: 取引ID
 required:
   - toDoCode
+  - toDoMessage
