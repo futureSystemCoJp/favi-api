@@ -1160,30 +1160,49 @@ paths:
                         photoIndex:
                           type: number
                           description: 写真番号index
-                        photoParts:
-                          type: number
-                          description: 写真箇所種別
                         photoComment:
                           type: string
                           description: 写真コメント
+                        photoThumbnail:
+                          type: string
+                          description: 写真サムネイル
+                        angleCode:
+                          type: number
+                          description: 画角ID
+                        angleName:
+                          type: string
+                          description: "画角名\t"
+                        angleFile:
+                          type: string
+                          description: "ファイル名\t"
+                        angleGroup:
+                          type: number
+                          description: "アングル種別\t"
                       required:
                         - photoIndex
-                        - photoParts
                         - photoComment
-                  damage:
+                  problem:
                     type: array
                     items:
                       type: object
                       properties:
-                        damageSection:
-                          type: number
-                          description: "問題箇所種別\t"
-                        damageDescription:
+                        problemText:
                           type: string
-                          description: "問題テキスト\t"
+                          description: 問題内容
+                        problemThumbnail:
+                          type: string
+                          description: 写真サムネイル
+                        partGroup:
+                          type: number
+                          description: 問題箇所種別
+                        partName:
+                          type: string
+                          description: 問題箇所名
+                        partCode:
+                          type: number
+                          description: 問題箇所ID
                       required:
-                        - damageSection
-                        - damageDescription
+                        - problemText
                   user:
                     type:
                       - string
@@ -1264,7 +1283,7 @@ paths:
                   - exhibitMarket
                   - install
                   - photo
-                  - damage
+                  - problem
                   - user
                   - comment
       operationId: get-exhibit-exhivitCode
